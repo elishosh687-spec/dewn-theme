@@ -1,0 +1,1425 @@
+{%- comment -%}
+  sections/custom-design-test.liquid
+  Component showcase / design test section.
+  Visualizes the design system (buttons, headings, body text, product card)
+  based on values defined in design.json.
+{%- endcomment -%}
+
+<section class="custom-design-test section-{{ section.id }}">
+  <div class="custom-design-test__inner page-width">
+
+    <!-- TYPOGRAPHY -->
+    <div class="custom-design-test__group">
+      <h2 class="custom-design-test__group-title">
+        {{ section.settings.typography_group_title | default: 'טיפוגרפיה' }}
+      </h2>
+
+      <h1 class="cdt-heading-1">
+        {{ section.settings.typography_h1 | default: 'כותרת H1 – חדרי תינוקות רכים ונעימים' }}
+      </h1>
+      <h2 class="cdt-heading-2">
+        {{ section.settings.typography_h2 | default: 'כותרת H2 – מיטות, שידות וסטים מלאים' }}
+      </h2>
+      <h3 class="cdt-heading-3">
+        {{ section.settings.typography_h3 | default: 'כותרת H3 – טקסט משני / כותרת בלוק' }}
+      </h3>
+
+      <p class="cdt-body">
+        {{ section.settings.typography_body | default: 'זהו טקסט פסקה רגיל. אמור להיראות נקי, קריא ורך, עם מרווח שורות נעים לעין, מתאים לתיאורי מוצרים, תיאורי קטגוריות ותכנים כלליים באתר.' }}
+      </p>
+
+      <p class="cdt-body-small">
+        {{ section.settings.typography_body_small | default: 'זהו טקסט משני קטן יותר (לתיוגים, תוויות, הערות קטנות).' }}
+      </p>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="custom-design-test__group">
+      <h2 class="custom-design-test__group-title">
+        {{ section.settings.buttons_group_title | default: 'כפתורים' }}
+      </h2>
+
+      <div class="custom-design-test__buttons-row">
+        <a href="#" class="cdt-button cdt-button--primary">
+          {{ section.settings.primary_button_label | default: 'כפתור ראשי' }}
+        </a>
+        <a href="#" class="cdt-button cdt-button--secondary">
+          {{ section.settings.secondary_button_label | default: 'כפתור משני' }}
+        </a>
+        <button type="button" class="cdt-button-icon" aria-label="אייקון">
+          {{ section.settings.icon_button_label | default: '♥' }}
+        </button>
+      </div>
+
+      <p class="cdt-note">
+        {{ section.settings.buttons_note | default: 'הכפתור הראשי משתמש בצבע המותג #CDB9A2 (primary), הכפתור המשני בקו מסגרת עדין על רקע בהיר.' }}
+      </p>
+    </div>
+
+    <!-- PRODUCT CARD -->
+    <div class="custom-design-test__group">
+      <h2 class="custom-design-test__group-title">
+        {{ section.settings.product_group_title | default: 'כרטיס מוצר לדוגמה' }}
+      </h2>
+
+      <div class="cdt-product-card">
+        <div class="cdt-product-card__image-wrapper">
+          {%- if section.settings.product_image != blank -%}
+            {{ section.settings.product_image
+              | image_url: width: 400
+              | image_tag: loading: 'lazy', alt: section.settings.product_title
+            }}
+          {%- else -%}
+            <div class="cdt-product-card__placeholder">
+              תמונת מוצר
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="cdt-product-card__content">
+          <p class="cdt-product-card__brand">
+            {{ section.settings.product_brand | default: 'מותג לדוגמה' }}
+          </p>
+          <h3 class="cdt-product-card__title">
+            {{ section.settings.product_title | default: 'מיטת תינוק דגם עמית לבן' }}
+          </h3>
+
+          <div class="cdt-product-card__prices">
+            <span class="cdt-product-card__price">
+              {{ section.settings.product_price | default: '₪ 1,390' }}
+            </span>
+            <span class="cdt-product-card__club-price">
+              {{ section.settings.product_club_price | default: '₪ 1,190 לחברי מועדון' }}
+            </span>
+          </div>
+
+          <div class="cdt-product-card__actions">
+            <a href="#" class="cdt-button cdt-button--primary cdt-product-card__cta">
+              {{ section.settings.product_primary_cta | default: 'הוסף לסל' }}
+            </a>
+            <a href="#" class="cdt-link">
+              {{ section.settings.product_secondary_cta | default: 'קנה עכשיו' }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLLECTION PAGE EXAMPLE -->
+    <div class="custom-design-test__group">
+      <h2 class="custom-design-test__group-title">
+        {{ section.settings.collection_group_title | default: 'דוגמה לדף קולקציה' }}
+      </h2>
+
+      <div class="cdt-collection-grid">
+        <!-- Product Card 1 -->
+        <div class="cdt-product-card">
+          <div class="cdt-product-card__image-wrapper">
+            {%- if section.settings.collection_product_1_image != blank -%}
+              {{ section.settings.collection_product_1_image
+                | image_url: width: 400
+                | image_tag: loading: 'lazy', alt: section.settings.collection_product_1_title
+              }}
+            {%- else -%}
+              <div class="cdt-product-card__placeholder">
+                תמונת מוצר
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="cdt-product-card__content">
+            <p class="cdt-product-card__brand">
+              {{ section.settings.collection_product_1_brand | default: 'מותג לדוגמה' }}
+            </p>
+            <h3 class="cdt-product-card__title">
+              {{ section.settings.collection_product_1_title | default: 'מיטת תינוק דגם עמית לבן' }}
+            </h3>
+            <div class="cdt-product-card__prices">
+              <span class="cdt-product-card__price">
+                {{ section.settings.collection_product_1_price | default: '₪ 1,390' }}
+              </span>
+              <span class="cdt-product-card__club-price">
+                {{ section.settings.collection_product_1_club_price | default: '₪ 1,190 לחברי מועדון' }}
+              </span>
+            </div>
+            <div class="cdt-product-card__actions">
+              <a href="#" class="cdt-button cdt-button--primary cdt-product-card__cta">
+                {{ section.settings.collection_product_1_cta | default: 'הוסף לסל' }}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 2 -->
+        <div class="cdt-product-card">
+          <div class="cdt-product-card__image-wrapper">
+            {%- if section.settings.collection_product_2_image != blank -%}
+              {{ section.settings.collection_product_2_image
+                | image_url: width: 400
+                | image_tag: loading: 'lazy', alt: section.settings.collection_product_2_title
+              }}
+            {%- else -%}
+              <div class="cdt-product-card__placeholder">
+                תמונת מוצר
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="cdt-product-card__content">
+            <p class="cdt-product-card__brand">
+              {{ section.settings.collection_product_2_brand | default: 'מותג לדוגמה' }}
+            </p>
+            <h3 class="cdt-product-card__title">
+              {{ section.settings.collection_product_2_title | default: 'שידת החתלה דגם נועה' }}
+            </h3>
+            <div class="cdt-product-card__prices">
+              <span class="cdt-product-card__price">
+                {{ section.settings.collection_product_2_price | default: '₪ 890' }}
+              </span>
+              <span class="cdt-product-card__club-price">
+                {{ section.settings.collection_product_2_club_price | default: '₪ 750 לחברי מועדון' }}
+              </span>
+            </div>
+            <div class="cdt-product-card__actions">
+              <a href="#" class="cdt-button cdt-button--primary cdt-product-card__cta">
+                {{ section.settings.collection_product_2_cta | default: 'הוסף לסל' }}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 3 -->
+        <div class="cdt-product-card">
+          <div class="cdt-product-card__image-wrapper">
+            {%- if section.settings.collection_product_3_image != blank -%}
+              {{ section.settings.collection_product_3_image
+                | image_url: width: 400
+                | image_tag: loading: 'lazy', alt: section.settings.collection_product_3_title
+              }}
+            {%- else -%}
+              <div class="cdt-product-card__placeholder">
+                תמונת מוצר
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="cdt-product-card__content">
+            <p class="cdt-product-card__brand">
+              {{ section.settings.collection_product_3_brand | default: 'מותג לדוגמה' }}
+            </p>
+            <h3 class="cdt-product-card__title">
+              {{ section.settings.collection_product_3_title | default: 'צעצוע עץ דובי' }}
+            </h3>
+            <div class="cdt-product-card__prices">
+              <span class="cdt-product-card__price">
+                {{ section.settings.collection_product_3_price | default: '₪ 120' }}
+              </span>
+              <span class="cdt-product-card__club-price">
+                {{ section.settings.collection_product_3_club_price | default: '₪ 99 לחברי מועדון' }}
+              </span>
+            </div>
+            <div class="cdt-product-card__actions">
+              <a href="#" class="cdt-button cdt-button--primary cdt-product-card__cta">
+                {{ section.settings.collection_product_3_cta | default: 'הוסף לסל' }}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 4 -->
+        <div class="cdt-product-card">
+          <div class="cdt-product-card__image-wrapper">
+            {%- if section.settings.collection_product_4_image != blank -%}
+              {{ section.settings.collection_product_4_image
+                | image_url: width: 400
+                | image_tag: loading: 'lazy', alt: section.settings.collection_product_4_title
+              }}
+            {%- else -%}
+              <div class="cdt-product-card__placeholder">
+                תמונת מוצר
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="cdt-product-card__content">
+            <p class="cdt-product-card__brand">
+              {{ section.settings.collection_product_4_brand | default: 'מותג לדוגמה' }}
+            </p>
+            <h3 class="cdt-product-card__title">
+              {{ section.settings.collection_product_4_title | default: 'חדר תינוקות סט מלא' }}
+            </h3>
+            <div class="cdt-product-card__prices">
+              <span class="cdt-product-card__price">
+                {{ section.settings.collection_product_4_price | default: '₪ 3,990' }}
+              </span>
+              <span class="cdt-product-card__club-price">
+                {{ section.settings.collection_product_4_club_price | default: '₪ 3,490 לחברי מועדון' }}
+              </span>
+            </div>
+            <div class="cdt-product-card__actions">
+              <a href="#" class="cdt-button cdt-button--primary cdt-product-card__cta">
+                {{ section.settings.collection_product_4_cta | default: 'הוסף לסל' }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="cdt-note">
+        {{ section.settings.collection_note | default: 'דוגמה לתצוגת קולקציה עם גריד של כרטיסי מוצר. הגריד מותאם למובייל (עמודה אחת) ולטאבלט/דסקטופ (2-4 עמודות).' }}
+      </p>
+    </div>
+
+    <!-- CART PAGE EXAMPLE -->
+    <div class="custom-design-test__group">
+      <h2 class="custom-design-test__group-title">
+        {{ section.settings.cart_group_title | default: 'דוגמה לעגלת קניות' }}
+      </h2>
+
+      <div class="cdt-cart">
+        <div class="cdt-cart__items">
+          <!-- Cart Item 1 -->
+          <div class="cdt-cart-item">
+            <div class="cdt-cart-item__image">
+              {%- if section.settings.cart_item_1_image != blank -%}
+                {{ section.settings.cart_item_1_image
+                  | image_url: width: 120
+                  | image_tag: loading: 'lazy', alt: section.settings.cart_item_1_title
+                }}
+              {%- else -%}
+                <div class="cdt-cart-item__placeholder">
+                  תמונה
+                </div>
+              {%- endif -%}
+            </div>
+            <div class="cdt-cart-item__details">
+              <h3 class="cdt-cart-item__title">
+                {{ section.settings.cart_item_1_title | default: 'מיטת תינוק דגם עמית לבן' }}
+              </h3>
+              <p class="cdt-cart-item__variant">
+                {{ section.settings.cart_item_1_variant | default: 'גודל: סטנדרטי' }}
+              </p>
+              <div class="cdt-cart-item__price">
+                {{ section.settings.cart_item_1_price | default: '₪ 1,390' }}
+              </div>
+            </div>
+            <div class="cdt-cart-item__quantity">
+              <label class="cdt-cart-item__quantity-label">כמות:</label>
+              <div class="cdt-quantity-selector">
+                <button type="button" class="cdt-quantity-selector__button" aria-label="הפחת כמות">−</button>
+                <input type="number" class="cdt-quantity-selector__input" value="1" min="1" readonly>
+                <button type="button" class="cdt-quantity-selector__button" aria-label="הוסף כמות">+</button>
+              </div>
+            </div>
+            <div class="cdt-cart-item__total">
+              <span class="cdt-cart-item__total-label">סה"כ:</span>
+              <span class="cdt-cart-item__total-price">{{ section.settings.cart_item_1_total | default: '₪ 1,390' }}</span>
+            </div>
+            <button type="button" class="cdt-cart-item__remove" aria-label="הסר מהעגלה">
+              ×
+            </button>
+          </div>
+
+          <!-- Cart Item 2 -->
+          <div class="cdt-cart-item">
+            <div class="cdt-cart-item__image">
+              {%- if section.settings.cart_item_2_image != blank -%}
+                {{ section.settings.cart_item_2_image
+                  | image_url: width: 120
+                  | image_tag: loading: 'lazy', alt: section.settings.cart_item_2_title
+                }}
+              {%- else -%}
+                <div class="cdt-cart-item__placeholder">
+                  תמונה
+                </div>
+              {%- endif -%}
+            </div>
+            <div class="cdt-cart-item__details">
+              <h3 class="cdt-cart-item__title">
+                {{ section.settings.cart_item_2_title | default: 'שידת החתלה דגם נועה' }}
+              </h3>
+              <p class="cdt-cart-item__variant">
+                {{ section.settings.cart_item_2_variant | default: 'צבע: לבן' }}
+              </p>
+              <div class="cdt-cart-item__price">
+                {{ section.settings.cart_item_2_price | default: '₪ 890' }}
+              </div>
+            </div>
+            <div class="cdt-cart-item__quantity">
+              <label class="cdt-cart-item__quantity-label">כמות:</label>
+              <div class="cdt-quantity-selector">
+                <button type="button" class="cdt-quantity-selector__button" aria-label="הפחת כמות">−</button>
+                <input type="number" class="cdt-quantity-selector__input" value="2" min="1" readonly>
+                <button type="button" class="cdt-quantity-selector__button" aria-label="הוסף כמות">+</button>
+              </div>
+            </div>
+            <div class="cdt-cart-item__total">
+              <span class="cdt-cart-item__total-label">סה"כ:</span>
+              <span class="cdt-cart-item__total-price">{{ section.settings.cart_item_2_total | default: '₪ 1,780' }}</span>
+            </div>
+            <button type="button" class="cdt-cart-item__remove" aria-label="הסר מהעגלה">
+              ×
+            </button>
+          </div>
+        </div>
+
+        <div class="cdt-cart__summary">
+          <div class="cdt-cart-summary">
+            <h3 class="cdt-cart-summary__title">
+              {{ section.settings.cart_summary_title | default: 'סיכום הזמנה' }}
+            </h3>
+            <div class="cdt-cart-summary__row">
+              <span class="cdt-cart-summary__label">סה"כ ביניים:</span>
+              <span class="cdt-cart-summary__value">{{ section.settings.cart_subtotal | default: '₪ 3,170' }}</span>
+            </div>
+            <div class="cdt-cart-summary__row">
+              <span class="cdt-cart-summary__label">משלוח:</span>
+              <span class="cdt-cart-summary__value">{{ section.settings.cart_shipping | default: 'חינם' }}</span>
+            </div>
+            <div class="cdt-cart-summary__row cdt-cart-summary__row--total">
+              <span class="cdt-cart-summary__label">סה"כ לתשלום:</span>
+              <span class="cdt-cart-summary__value">{{ section.settings.cart_total | default: '₪ 3,170' }}</span>
+            </div>
+            <div class="cdt-cart-summary__actions">
+              <button type="button" class="cdt-button cdt-button--primary cdt-cart-summary__checkout">
+                {{ section.settings.cart_checkout_button | default: 'המשך לתשלום' }}
+              </button>
+              <button type="button" class="cdt-button cdt-button--secondary cdt-cart-summary__update">
+                {{ section.settings.cart_update_button | default: 'עדכן עגלה' }}
+              </button>
+            </div>
+            <p class="cdt-cart-summary__note">
+              {{ section.settings.cart_summary_note | default: 'משלוח חינם על הזמנות מעל ₪ 500' }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <p class="cdt-note">
+        {{ section.settings.cart_note | default: 'דוגמה לעגלת קניות עם רשימת פריטים, בחירת כמות, וסיכום הזמנה. העיצוב מותאם למובייל ולמסכים גדולים יותר.' }}
+      </p>
+    </div>
+
+  </div>
+</section>
+
+{% stylesheet %}
+  .section-{{ section.id }}.custom-design-test {
+    direction: rtl;
+    text-align: right;
+    background-color: #FFFFFF; /* design.json.colors.background */
+    padding: 32px 0 40px;
+  }
+
+  .section-{{ section.id }} .custom-design-test__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px; /* design.json.spacing.lg */
+  }
+
+  .section-{{ section.id }} .custom-design-test__group {
+    padding: 24px;
+    border-radius: 12px; /* design.json.borders.radius.md */
+    border: 1px solid #F0F0F0; /* design.json.colors.borderLight */
+    background-color: #F9F9F9; /* design.json.colors.backgroundSecondary */
+  }
+
+  .section-{{ section.id }} .custom-design-test__group-title {
+    margin: 0 0 16px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 20px; /* design.json.typography.fontSizes.xl */
+    font-weight: 600;
+    color: #333333; /* design.json.colors.text */
+  }
+
+  /* TYPOGRAPHY EXAMPLES */
+  .section-{{ section.id }} .cdt-heading-1 {
+    font-family: 'Heebo', sans-serif;
+    font-size: 32px; /* like productPage.productTitle */
+    font-weight: 700;
+    color: #333333;
+    margin: 0 0 8px;
+  }
+
+  .section-{{ section.id }} .cdt-heading-2 {
+    font-family: 'Heebo', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333333;
+    margin: 0 0 8px;
+  }
+
+  .section-{{ section.id }} .cdt-heading-3 {
+    font-family: 'Heebo', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #666666;
+    margin: 0 0 12px;
+  }
+
+  .section-{{ section.id }} .cdt-body {
+    font-family: 'Assistant', sans-serif;
+    font-size: 16px; /* design.json.typography.fontSizes.base */
+    font-weight: 400;
+    color: #333333;
+    line-height: 1.5;
+    margin: 0 0 8px;
+  }
+
+  .section-{{ section.id }} .cdt-body-small {
+    font-family: 'Assistant', sans-serif;
+    font-size: 14px; /* design.json.typography.fontSizes.sm */
+    font-weight: 400;
+    color: #666666;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .section-{{ section.id }} .cdt-note {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #999999; /* design.json.colors.textLight */
+  }
+
+  /* BUTTONS */
+  .section-{{ section.id }} .custom-design-test__buttons-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .section-{{ section.id }} .cdt-button {
+    display: inline-block;
+    padding: 12px 24px; /* design.json.components.button.primary.padding */
+    border-radius: 12px; /* design.json.components.button.primary.borderRadius */
+    font-family: 'Assistant', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 250ms ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-{{ section.id }} .cdt-button--primary {
+    background: linear-gradient(135deg, #E5D4C0 0%, #CDB9A2 50%, #B8A68F 100%);
+    color: #FFFFFF;
+    border: none;
+    box-shadow: 0 4px 12px rgba(205, 185, 162, 0.3), 
+                0 2px 4px rgba(184, 166, 143, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .section-{{ section.id }} .cdt-button--primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.3), 
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .section-{{ section.id }} .cdt-button--primary:hover {
+    background: linear-gradient(135deg, #D4C4B0 0%, #B8A68F 50%, #A8957F 100%);
+    box-shadow: 0 6px 16px rgba(205, 185, 162, 0.4), 
+                0 3px 6px rgba(184, 166, 143, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .section-{{ section.id }} .cdt-button--primary:hover::before {
+    left: 100%;
+  }
+
+  .section-{{ section.id }} .cdt-button--secondary {
+    background-color: transparent;
+    color: #333333;
+    border: 1px solid #E0E0E0; /* design.json.colors.border */
+  }
+
+  .section-{{ section.id }} .cdt-button--secondary:hover {
+    background-color: #F5F5F5; /* design.json.colors.secondary */
+  }
+
+  .section-{{ section.id }} .cdt-button-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* design.json.components.button.icon.borderRadius */
+    background: linear-gradient(135deg, #E5D4C0 0%, #CDB9A2 50%, #B8A68F 100%);
+    color: #FFFFFF;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(205, 185, 162, 0.3), 
+                0 2px 4px rgba(184, 166, 143, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 250ms ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-{{ section.id }} .cdt-button-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.3), 
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .section-{{ section.id }} .cdt-button-icon:hover {
+    background: linear-gradient(135deg, #D4C4B0 0%, #B8A68F 50%, #A8957F 100%);
+    box-shadow: 0 6px 16px rgba(205, 185, 162, 0.4), 
+                0 3px 6px rgba(184, 166, 143, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px) scale(1.05);
+  }
+
+  .section-{{ section.id }} .cdt-button-icon:hover::before {
+    left: 100%;
+  }
+
+  /* PRODUCT CARD */
+  .section-{{ section.id }} .cdt-product-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #FFFFFF; /* design.json.components.productCard.background */
+    border-radius: 16px; /* design.json.components.productCard.borderRadius */
+    padding: 0; /* productCard.padding */
+    border: 1px solid #F0F0F0;
+    overflow: hidden;
+  }
+
+  .section-{{ section.id }} .cdt-product-card__image-wrapper {
+    overflow: hidden;
+  }
+
+  .section-{{ section.id }} .cdt-product-card__image-wrapper img,
+  .section-{{ section.id }} .cdt-product-card__placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* design.json.components.productCard.image.aspectRatio */
+    object-fit: cover;
+    border-radius: 12px; /* design.json.components.productCard.image.borderRadius */
+  }
+
+  .section-{{ section.id }} .cdt-product-card__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F5F5F5;
+    color: #999999;
+    font-family: 'Assistant', sans-serif;
+  }
+
+  .section-{{ section.id }} .cdt-product-card__content {
+    padding: 12px 12px 16px;
+  }
+
+  .section-{{ section.id }} .cdt-product-card__brand {
+    font-size: 12px;
+    color: #999999;
+    margin: 0 0 4px;
+  }
+
+  .section-{{ section.id }} .cdt-product-card__title {
+    font-family: 'Assistant', sans-serif;
+    font-size: 16px; /* design.json.components.productCard.title.fontSize */
+    font-weight: 400;
+    color: #333333;
+    margin: 0 0 8px;
+  }
+
+  .section-{{ section.id }} .cdt-product-card__prices {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 12px;
+  }
+
+  .section-{{ section.id }} .cdt-product-card__price {
+    font-size: 18px; /* productCard.price.fontSize */
+    font-weight: 600;
+    color: #333333;
+  }
+
+  .section-{{ section.id }} .cdt-product-card__club-price {
+    font-size: 14px;
+    font-weight: 500;
+    color: #CDB9A2;
+  }
+
+  .section-{{ section.id }} .cdt-product-card__actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .section-{{ section.id }} .cdt-product-card__cta {
+    flex-shrink: 0;
+  }
+
+  .section-{{ section.id }} .cdt-link {
+    font-family: 'Assistant', sans-serif;
+    font-size: 14px;
+    color: #333333;
+    text-decoration: underline;
+  }
+
+  /* COLLECTION GRID */
+  .section-{{ section.id }} .cdt-collection-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px; /* design.json.spacing.lg */
+  }
+
+  @media (min-width: 768px) {
+    .section-{{ section.id }} .custom-design-test__inner {
+      gap: 40px;
+    }
+
+    .section-{{ section.id }} .cdt-product-card {
+      max-width: 320px;
+    }
+
+    .section-{{ section.id }} .cdt-collection-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .section-{{ section.id }} .cdt-collection-grid .cdt-product-card {
+      max-width: 100%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-{{ section.id }} .cdt-collection-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .section-{{ section.id }} .cdt-collection-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* CART PAGE */
+  .section-{{ section.id }} .cdt-cart {
+    display: flex;
+    flex-direction: column;
+    gap: 32px; /* design.json.spacing.xl */
+  }
+
+  .section-{{ section.id }} .cdt-cart__items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* design.json.spacing.md */
+  }
+
+  .section-{{ section.id }} .cdt-cart-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background-color: #FFFFFF;
+    border: 1px solid #F0F0F0; /* design.json.colors.borderLight */
+    border-radius: 12px; /* design.json.borders.radius.md */
+    position: relative;
+  }
+
+  .section-{{ section.id }} .cdt-cart-item__image {
+    width: 100%;
+    max-width: 120px;
+    aspect-ratio: 1 / 1;
+    border-radius: 8px; /* design.json.borders.radius.sm */
+    overflow: hidden;
+    background-color: #F5F5F5;
+  }
+
+  .section-{{ section.id }} .cdt-cart-item__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .section-{{ section.id }} .cdt-cart-item__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F5F5F5;
+    color: #999999;
+    font-size: 12px;
+    font-family: 'Assistant', sans-serif;
+  }
+
+  .section-{{ section.id }} .cdt-cart-item__details {
+    flex: 1;
+  }
+
+  .section-{{ section.id }} .cdt-cart-item__title {
+    font-family: 'Assistant', sans-serif;
+    font-size: 16px; /* design.json.typography.fontSizes.base */
+    font-weight: 500;
+    color: #333333;
+    margin: 0 0 4px;
+  }
+
+  .section-{{ section.id }} .cdt-cart-item__variant {
+    font-family: 'Assistant', sans-serif;
+    font-size: 14px; /* design.json.typography.fontSizes.sm */
+    color: #666666; /* design.json.colors.textSecondary */
+    margin: 0 0 8px;
+  }
+
+  .section-{{ section.id }} .cdt-cart-item__price {
+    font-family: 'Assistant', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333333;
+  }
+
+  .section-{{ section.id }} .cdt-cart-item__quantity {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .section-{{ section.id }} .cdt-cart-item__quantity-label {
+    font-family: 'Assistant', sans-serif;
+    font-size: 14px;
+    color: #666666;
+    margin: 0;
+  }
+
+  .section-{{ section.id }} .cdt-quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #E0E0E0; /* design.json.colors.border */
+    border-radius: 8px; /* design.json.borders.radius.sm */
+    overflow: hidden;
+    width: fit-content;
+  }
+
+  .section-{{ section.id }} .cdt-quantity-selector__button {
+    width: 36px;
+    height: 36px;
+    background-color: #FFFFFF;
+    border: none;
+    color: #333333;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 150ms ease; /* design.json.transitions.fast */
+  }
+
+  .section-{{ section.id }} .cdt-quantity-selector__button:hover {
+    background-color: #F5F5F5; /* design.json.colors.secondary */
+  }
+
+  .section-{{ section.id }} .cdt-quantity-selector__input {
+    width: 50px;
+    height: 36px;
+    border: none;
+    border-left: 1px solid #E0E0E0;
+    border-right: 1px solid #E0E0E0;
+    text-align: center;
+    font-family: 'Assistant', sans-serif;
+    font-size: 16px;
+    color: #333333;
+    background-color: #FFFFFF;
+    padding: 0;
+  }
+
+  .section-{{ section.id }} .cdt-cart-item__total {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+  }
+
+  .section-{{ section.id }} .cdt-cart-item__total-label {
+    font-family: 'Assistant', sans-serif;
+    font-size: 12px;
+    color: #999999;
+  }
+
+  .section-{{ section.id }} .cdt-cart-item__total-price {
+    font-family: 'Assistant', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333333;
+  }
+
+  .section-{{ section.id }} .cdt-cart-item__remove {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #E0E0E0;
+    color: #666666;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 150ms ease;
+  }
+
+  .section-{{ section.id }} .cdt-cart-item__remove:hover {
+    background-color: #FFFFFF;
+    color: #D32F2F; /* design.json.colors.error */
+    border-color: #D32F2F;
+  }
+
+  .section-{{ section.id }} .cdt-cart__summary {
+    margin-top: 8px;
+  }
+
+  .section-{{ section.id }} .cdt-cart-summary {
+    padding: 24px;
+    background-color: #F9F9F9; /* design.json.colors.backgroundSecondary */
+    border: 1px solid #F0F0F0; /* design.json.colors.borderLight */
+    border-radius: 12px; /* design.json.borders.radius.md */
+  }
+
+  .section-{{ section.id }} .cdt-cart-summary__title {
+    font-family: 'Heebo', sans-serif;
+    font-size: 20px; /* design.json.typography.fontSizes.xl */
+    font-weight: 600;
+    color: #333333;
+    margin: 0 0 16px;
+  }
+
+  .section-{{ section.id }} .cdt-cart-summary__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #F0F0F0;
+  }
+
+  .section-{{ section.id }} .cdt-cart-summary__row--total {
+    border-bottom: none;
+    border-top: 2px solid #E0E0E0;
+    margin-top: 8px;
+    padding-top: 16px;
+  }
+
+  .section-{{ section.id }} .cdt-cart-summary__label {
+    font-family: 'Assistant', sans-serif;
+    font-size: 16px;
+    color: #666666;
+  }
+
+  .section-{{ section.id }} .cdt-cart-summary__row--total .cdt-cart-summary__label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333333;
+  }
+
+  .section-{{ section.id }} .cdt-cart-summary__value {
+    font-family: 'Assistant', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+  }
+
+  .section-{{ section.id }} .cdt-cart-summary__row--total .cdt-cart-summary__value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333333;
+  }
+
+  .section-{{ section.id }} .cdt-cart-summary__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .section-{{ section.id }} .cdt-cart-summary__checkout,
+  .section-{{ section.id }} .cdt-cart-summary__update {
+    width: 100%;
+  }
+
+  .section-{{ section.id }} .cdt-cart-summary__note {
+    margin-top: 16px;
+    font-family: 'Assistant', sans-serif;
+    font-size: 14px;
+    color: #999999;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .section-{{ section.id }} .cdt-cart {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .section-{{ section.id }} .cdt-cart__items {
+      flex: 1;
+    }
+
+    .section-{{ section.id }} .cdt-cart__summary {
+      width: 320px;
+      margin-top: 0;
+      position: sticky;
+      top: 24px;
+    }
+
+    .section-{{ section.id }} .cdt-cart-item {
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-{{ section.id }} .cdt-cart-item__image {
+      flex-shrink: 0;
+    }
+
+    .section-{{ section.id }} .cdt-cart-item__quantity {
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-{{ section.id }} .cdt-cart-item__quantity-label {
+      margin: 0;
+    }
+
+    .section-{{ section.id }} .cdt-cart-item__total {
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      min-width: 120px;
+    }
+
+    .section-{{ section.id }} .cdt-cart-summary__actions {
+      flex-direction: row;
+    }
+
+    .section-{{ section.id }} .cdt-cart-summary__checkout,
+    .section-{{ section.id }} .cdt-cart-summary__update {
+      flex: 1;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Custom design test",
+  "tag": "section",
+  "class": "custom-section custom-design-test",
+  "settings": [
+    {
+      "type": "text",
+      "id": "typography_group_title",
+      "label": "כותרת קבוצה - טיפוגרפיה",
+      "default": "טיפוגרפיה"
+    },
+    {
+      "type": "text",
+      "id": "typography_h1",
+      "label": "טקסט כותרת H1",
+      "default": "כותרת H1 – חדרי תינוקות רכים ונעימים"
+    },
+    {
+      "type": "text",
+      "id": "typography_h2",
+      "label": "טקסט כותרת H2",
+      "default": "כותרת H2 – מיטות, שידות וסטים מלאים"
+    },
+    {
+      "type": "text",
+      "id": "typography_h3",
+      "label": "טקסט כותרת H3",
+      "default": "כותרת H3 – טקסט משני / כותרת בלוק"
+    },
+    {
+      "type": "textarea",
+      "id": "typography_body",
+      "label": "טקסט פסקה רגיל",
+      "default": "זהו טקסט פסקה רגיל. אמור להיראות נקי, קריא ורך, עם מרווח שורות נעים לעין, מתאים לתיאורי מוצרים, תיאורי קטגוריות ותכנים כלליים באתר."
+    },
+    {
+      "type": "text",
+      "id": "typography_body_small",
+      "label": "טקסט פסקה משנית קטנה",
+      "default": "זהו טקסט משני קטן יותר (לתיוגים, תוויות, הערות קטנות)."
+    },
+    {
+      "type": "text",
+      "id": "buttons_group_title",
+      "label": "כותרת קבוצה - כפתורים",
+      "default": "כפתורים"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_label",
+      "label": "טקסט כפתור ראשי",
+      "default": "כפתור ראשי"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "label": "טקסט כפתור משני",
+      "default": "כפתור משני"
+    },
+    {
+      "type": "text",
+      "id": "icon_button_label",
+      "label": "תו/אייקון לכפתור עגול",
+      "default": "♥"
+    },
+    {
+      "type": "textarea",
+      "id": "buttons_note",
+      "label": "טקסט הסבר מתחת לכפתורים",
+      "default": "הכפתור הראשי משתמש בצבע המותג #CDB9A2 (primary), הכפתור המשני בקו מסגרת עדין על רקע בהיר."
+    },
+    {
+      "type": "text",
+      "id": "product_group_title",
+      "label": "כותרת קבוצה - כרטיס מוצר",
+      "default": "כרטיס מוצר לדוגמה"
+    },
+    {
+      "type": "text",
+      "id": "product_brand",
+      "label": "מותג לדוגמה",
+      "default": "מותג לדוגמה"
+    },
+    {
+      "type": "text",
+      "id": "product_price",
+      "label": "מחיר רגיל",
+      "default": "₪ 1,390"
+    },
+    {
+      "type": "text",
+      "id": "product_club_price",
+      "label": "מחיר לחברי מועדון",
+      "default": "₪ 1,190 לחברי מועדון"
+    },
+    {
+      "type": "text",
+      "id": "product_primary_cta",
+      "label": "טקסט כפתור ראשי בכרטיס",
+      "default": "הוסף לסל"
+    },
+    {
+      "type": "text",
+      "id": "product_secondary_cta",
+      "label": "טקסט קישור משני בכרטיס",
+      "default": "קנה עכשיו"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "תמונת מוצר לדוגמה"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "שם מוצר לדוגמה",
+      "default": "מיטת תינוק דגם עמית לבן"
+    },
+    {
+      "type": "text",
+      "id": "collection_group_title",
+      "label": "כותרת קבוצה - דוגמה לדף קולקציה",
+      "default": "דוגמה לדף קולקציה"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_1_title",
+      "label": "שם מוצר 1 בקולקציה",
+      "default": "מיטת תינוק דגם עמית לבן"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_1_brand",
+      "label": "מותג מוצר 1",
+      "default": "מותג לדוגמה"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_1_price",
+      "label": "מחיר מוצר 1",
+      "default": "₪ 1,390"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_1_club_price",
+      "label": "מחיר מועדון מוצר 1",
+      "default": "₪ 1,190 לחברי מועדון"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_1_cta",
+      "label": "טקסט כפתור מוצר 1",
+      "default": "הוסף לסל"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_product_1_image",
+      "label": "תמונת מוצר 1"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_2_title",
+      "label": "שם מוצר 2 בקולקציה",
+      "default": "שידת החתלה דגם נועה"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_2_brand",
+      "label": "מותג מוצר 2",
+      "default": "מותג לדוגמה"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_2_price",
+      "label": "מחיר מוצר 2",
+      "default": "₪ 890"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_2_club_price",
+      "label": "מחיר מועדון מוצר 2",
+      "default": "₪ 750 לחברי מועדון"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_2_cta",
+      "label": "טקסט כפתור מוצר 2",
+      "default": "הוסף לסל"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_product_2_image",
+      "label": "תמונת מוצר 2"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_3_title",
+      "label": "שם מוצר 3 בקולקציה",
+      "default": "צעצוע עץ דובי"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_3_brand",
+      "label": "מותג מוצר 3",
+      "default": "מותג לדוגמה"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_3_price",
+      "label": "מחיר מוצר 3",
+      "default": "₪ 120"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_3_club_price",
+      "label": "מחיר מועדון מוצר 3",
+      "default": "₪ 99 לחברי מועדון"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_3_cta",
+      "label": "טקסט כפתור מוצר 3",
+      "default": "הוסף לסל"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_product_3_image",
+      "label": "תמונת מוצר 3"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_4_title",
+      "label": "שם מוצר 4 בקולקציה",
+      "default": "חדר תינוקות סט מלא"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_4_brand",
+      "label": "מותג מוצר 4",
+      "default": "מותג לדוגמה"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_4_price",
+      "label": "מחיר מוצר 4",
+      "default": "₪ 3,990"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_4_club_price",
+      "label": "מחיר מועדון מוצר 4",
+      "default": "₪ 3,490 לחברי מועדון"
+    },
+    {
+      "type": "text",
+      "id": "collection_product_4_cta",
+      "label": "טקסט כפתור מוצר 4",
+      "default": "הוסף לסל"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_product_4_image",
+      "label": "תמונת מוצר 4"
+    },
+    {
+      "type": "textarea",
+      "id": "collection_note",
+      "label": "טקסט הסבר מתחת לגריד הקולקציה",
+      "default": "דוגמה לתצוגת קולקציה עם גריד של כרטיסי מוצר. הגריד מותאם למובייל (עמודה אחת) ולטאבלט/דסקטופ (2-4 עמודות)."
+    },
+    {
+      "type": "text",
+      "id": "cart_group_title",
+      "label": "כותרת קבוצה - עגלת קניות",
+      "default": "דוגמה לעגלת קניות"
+    },
+    {
+      "type": "text",
+      "id": "cart_item_1_title",
+      "label": "שם פריט 1 בעגלה",
+      "default": "מיטת תינוק דגם עמית לבן"
+    },
+    {
+      "type": "text",
+      "id": "cart_item_1_variant",
+      "label": "וריאנט פריט 1",
+      "default": "גודל: סטנדרטי"
+    },
+    {
+      "type": "text",
+      "id": "cart_item_1_price",
+      "label": "מחיר יחידה פריט 1",
+      "default": "₪ 1,390"
+    },
+    {
+      "type": "text",
+      "id": "cart_item_1_total",
+      "label": "סה\"כ פריט 1",
+      "default": "₪ 1,390"
+    },
+    {
+      "type": "image_picker",
+      "id": "cart_item_1_image",
+      "label": "תמונת פריט 1"
+    },
+    {
+      "type": "text",
+      "id": "cart_item_2_title",
+      "label": "שם פריט 2 בעגלה",
+      "default": "שידת החתלה דגם נועה"
+    },
+    {
+      "type": "text",
+      "id": "cart_item_2_variant",
+      "label": "וריאנט פריט 2",
+      "default": "צבע: לבן"
+    },
+    {
+      "type": "text",
+      "id": "cart_item_2_price",
+      "label": "מחיר יחידה פריט 2",
+      "default": "₪ 890"
+    },
+    {
+      "type": "text",
+      "id": "cart_item_2_total",
+      "label": "סה\"כ פריט 2",
+      "default": "₪ 1,780"
+    },
+    {
+      "type": "image_picker",
+      "id": "cart_item_2_image",
+      "label": "תמונת פריט 2"
+    },
+    {
+      "type": "text",
+      "id": "cart_summary_title",
+      "label": "כותרת סיכום הזמנה",
+      "default": "סיכום הזמנה"
+    },
+    {
+      "type": "text",
+      "id": "cart_subtotal",
+      "label": "סה\"כ ביניים",
+      "default": "₪ 3,170"
+    },
+    {
+      "type": "text",
+      "id": "cart_shipping",
+      "label": "משלוח",
+      "default": "חינם"
+    },
+    {
+      "type": "text",
+      "id": "cart_total",
+      "label": "סה\"כ לתשלום",
+      "default": "₪ 3,170"
+    },
+    {
+      "type": "text",
+      "id": "cart_checkout_button",
+      "label": "טקסט כפתור תשלום",
+      "default": "המשך לתשלום"
+    },
+    {
+      "type": "text",
+      "id": "cart_update_button",
+      "label": "טקסט כפתור עדכון",
+      "default": "עדכן עגלה"
+    },
+    {
+      "type": "text",
+      "id": "cart_summary_note",
+      "label": "הערה בסיכום הזמנה",
+      "default": "משלוח חינם על הזמנות מעל ₪ 500"
+    },
+    {
+      "type": "textarea",
+      "id": "cart_note",
+      "label": "טקסט הסבר מתחת לעגלה",
+      "default": "דוגמה לעגלת קניות עם רשימת פריטים, בחירת כמות, וסיכום הזמנה. העיצוב מותאם למובייל ולמסכים גדולים יותר."
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Custom design test",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+

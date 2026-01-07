@@ -1,0 +1,770 @@
+# 🚨 CURSOR RULES - Max Baby Shopify Theme
+
+## ⚠️ CRITICAL: READ THIS BEFORE ANY CODE CHANGES
+
+This is a Shopify Liquid theme project for a Hebrew (RTL) baby products store. ALL code must follow these rules.
+
+---
+
+## 🔴 RULE #1: LIQUID ONLY - NO EXCEPTIONS
+
+**MANDATORY:** ALL code must be written in **Shopify Liquid** only.
+
+✅ **ALLOWED:**
+- `.liquid` files (sections, blocks, snippets, templates, layouts)
+- CSS inside `{% stylesheet %}` or `{% style %}` tags
+- JavaScript inside `{% javascript %}` tags
+- Liquid syntax: `{{ }}` for output, `{% %}` for logic
+
+❌ **FORBIDDEN:**
+- React, Vue, Angular, or any JavaScript frameworks
+- TypeScript
+- Tailwind CSS, Bootstrap, or any CSS frameworks requiring build tools
+- Build tools (Webpack, Vite, Rollup, etc.)
+- npm packages or Node.js modules
+- Any code that requires compilation
+
+**Why?** Shopify themes only understand Liquid. Any other code will break.
+
+---
+
+## 🔴 RULE #2: ALWAYS USE design.json FOR STYLING
+
+**MANDATORY:** Before writing any CSS, check `design.json` for:
+- Colors (use exact hex codes from `design.json.colors`)
+- Typography (fonts, sizes, weights from `design.json.typography`)
+- Spacing (use `design.json.spacing` values)
+- Borders (radius, width from `design.json.borders`)
+- Shadows (from `design.json.shadows`)
+- Transitions (from `design.json.transitions`)
+- Breakpoints (from `design.json.breakpoints`)
+
+**Example:**
+```liquid
+{% stylesheet %}
+  .button {
+    background: #CDB9A2; /* from design.json.colors.primary */
+    padding: 12px 24px; /* from design.json.components.button.primary.padding */
+    border-radius: 8px; /* from design.json.borders.radius.md */
+  }
+{% endstylesheet %}
+```
+
+**If design.json doesn't have a value you need:**
+1. First, update `design.json` with the new value
+2. Then use it in your code
+3. **Never hardcode values without updating design.json first**
+
+### How to Reference design.json Values
+
+**In CSS:**
+```liquid
+{% stylesheet %}
+  .button {
+    /* Read values directly from design.json */
+    background: #CDB9A2; /* design.json.colors.primary */
+    padding: 12px 24px; /* design.json.components.button.primary.padding */
+    border-radius: 8px; /* design.json.borders.radius.md */
+  }
+{% endstylesheet %}
+```
+
+**If design.json doesn't have a value you need:**
+1. First update design.json with the new value
+2. Then use it in your code
+3. **Never hardcode without updating design.json first**
+
+---
+
+## 🔴 RULE #3: RTL (RIGHT-TO-LEFT) SUPPORT IS MANDATORY
+
+**MANDATORY:** All sections, blocks, and snippets must support Hebrew RTL.
+
+**Required CSS:**
+```liquid
+{% stylesheet %}
+  .section {
+    direction: rtl;
+    text-align: right;
+  }
+  
+  /* Use logical properties for spacing */
+  .element {
+    padding-inline-start: var(--spacing-md); /* instead of padding-left */
+    margin-inline-end: var(--spacing-sm); /* instead of margin-right */
+  }
+  
+  /* Flexbox RTL support */
+  .flex-container {
+    flex-direction: row-reverse; /* if needed */
+  }
+{% endstylesheet %}
+```
+
+**Liquid RTL considerations:**
+- Use `{{ 'key' | t }}` for all text (translations in `locales/he.json`)
+- Never hardcode Hebrew text directly in Liquid files
+- Test all layouts in RTL mode
+
+### Hebrew Typography Requirements (MANDATORY)
+
+**Fonts:**
+- Headings: `font-family: 'Heebo', sans-serif;`
+- Body text: `font-family: 'Assistant', sans-serif;`
+- **NEVER use fonts that don't support Hebrew characters**
+
+**Load Google Fonts in layout/theme.liquid:**
+```liquid
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
+```
+
+---
+
+## 🔴 RULE #4: SHOPIFY THEME ARCHITECTURE
+
+**Directory Structure:**
+- `sections/` - Full-width page components (`.liquid` files)
+- `blocks/` - Reusable, nestable components (`.liquid` files)
+- `snippets/` - Reusable code fragments (`.liquid` files)
+- `templates/` - Page structure definitions (`.json` files)
+- `layout/` - Top-level HTML wrappers (`.liquid` files)
+- `assets/` - Static files (CSS, JS, images)
+- `config/` - Theme settings
+- `locales/` - Translation files
+
+**File Requirements:**
+
+**Sections:**
+- Must be `.liquid` files in `sections/`
+- Must include `{% schema %}` block
+- Use `section.id` for unique CSS classes
+- Example: `sections/hero.liquid`
+
+**Blocks:**
+- Must be `.liquid` files in `blocks/`
+- Must include `{% doc %}` tag at the top
+- Must include `{% schema %}` block
+- Must include `{{ block.shopify_attributes }}` in HTML
+- Example: `blocks/text.liquid`
+
+**Snippets:**
+- Must be `.liquid` files in `snippets/`
+- Must include `{% doc %}` tag at the top with `@param` documentation
+- Accept parameters via `{% render 'snippet', param: value %}`
+- Example: `snippets/image.liquid`
+
+### When to Use Sections vs Blocks vs Snippets
+
+**Sections (sections/):**
+- Full-width page components
+- Editable via theme editor
+- Can contain blocks
+- Examples: Hero, Product Grid, Testimonials
+- Use when: Merchants need to customize via UI
+
+**Blocks (blocks/):**
+- Nestable, repeatable components within sections
+- Editable via theme editor
+- Examples: Testimonial Card, Feature Item, USP Badge
+- Must include `{{ block.shopify_attributes }}`
+- Use when: Merchants need to add/remove repeated items
+
+**Snippets (snippets/):**
+- Pure code reuse (no theme editor interaction)
+- Rendered programmatically via `{% render %}`
+- Examples: Product Card, Icon, Button
+- Accept parameters only
+- Use when: Code reuse without merchant customization
+
+**Rule of thumb:**
+- Need theme editor control → Section or Block
+- Pure code reuse → Snippet
+
+---
+
+## 🔴 RULE #5: SCHEMA REQUIREMENTS
+
+**Every Section and Block MUST include a `{% schema %}` block:**
+
+```liquid
+{% schema %}
+{
+  "name": "t:general.section_name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:labels.title",
+      "default": "Default Title"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.section_name"
+    }
+  ]
+}
+{% endschema %}
+```
+
+**Schema Best Practices:**
+- Use translation keys (`t:general.key`) for all labels
+- For single CSS property settings → use CSS variables
+- For multiple CSS properties → use CSS classes
+- Validate schema JSON using `schemas/section.json` or `schemas/theme_block.json`
+
+**Section generation requirements (Cursor AI):**
+- For **every new Shopify section** generated by Cursor:
+  - ALWAYS include a complete `{% schema %}` block with all required `settings` (and `blocks` if relevant).
+  - ALWAYS include a `"presets"` entry so the section is visible and addable in the Theme Editor.
+  - ALWAYS infer and define all necessary input `type`s (for example: `text`, `richtext`, `image_picker`, `range`, `checkbox`, `select`, `url`, `product_list`, `collection_list`, etc.) based on the described functionality of the section.
+  - NEVER omit schema just because the section is “simple” – every section must be fully editable via the Theme Editor.
+  - Prefer clear, self-documenting `id` names in snake_case that match the semantics of the setting (for example: `hero_title`, `background_image`, `cta_label`).
+
+---
+
+## 🔴 RULE #6: TRANSLATION REQUIREMENTS
+
+**MANDATORY:** All user-facing text must use translation filters.
+
+✅ **CORRECT:**
+```liquid
+<h2>{{ 'sections.hero.title' | t }}</h2>
+<button>{{ 'products.add_to_cart' | t }}</button>
+```
+
+❌ **WRONG:**
+```liquid
+<h2>כותרת</h2>
+<button>הוסף לעגלה</button>
+```
+
+**Translation File:**
+- Update `locales/en.default.json` with all new keys
+- Use hierarchical keys: `sections.hero.title`
+- Maximum 3 levels deep
+- Use snake_case for key names
+
+---
+
+## 🔴 RULE #7: PROJECT CONTEXT AWARENESS
+
+**This is a baby products store with:**
+- ~100 products (beds, changing tables, toys, room sets)
+- Hebrew (RTL) interface
+- Israeli market (ILS currency)
+- Mobile-first (70%+ traffic expected on mobile)
+- Fast timeline (5-7 days to launch)
+
+**Key Templates:**
+- `templates/product.json` - Serves ALL 100 products automatically
+- `templates/collection.json` - Serves all collection pages
+- `templates/index.json` - Homepage
+- `templates/cart.json` - Shopping cart
+
+**Product Organization (CRITICAL FOR FILTERS):**
+- Every product MUST have consistent `Product Type`:
+  - "מיטות תינוק" (cribs)
+  - "שידות החתלה" (changing tables)  
+  - "צעצועים" (toys)
+  - "חדרי תינוקות" (nursery sets)
+- Every product MUST have `Vendor` (brand name: סגל, טל, etc.)
+- These fields enable automated collections and native Shopify filtering
+- **Be consistent!** "מיטת תינוק" ≠ "מיטות תינוק" will break filters
+
+**Key Principle:** Build once, use everywhere. Never hardcode product-specific data.
+
+---
+
+## 🔴 RULE #8: MOBILE-FIRST RESPONSIVE DESIGN
+
+**MANDATORY:** All sections must be mobile-first and responsive.
+
+**Use design.json breakpoints:**
+```liquid
+{% stylesheet %}
+  .section {
+    /* Mobile styles (default) */
+    padding: var(--spacing-md);
+  }
+  
+  @media (min-width: 768px) { /* design.json.breakpoints.mobile */
+    .section {
+      padding: var(--spacing-xl);
+    }
+  }
+  
+  @media (min-width: 1024px) { /* design.json.breakpoints.tablet */
+    .section {
+      padding: var(--spacing-2xl);
+    }
+  }
+{% endstylesheet %}
+```
+
+**Test on mobile first!** Most Israeli customers shop on mobile.
+
+---
+
+## 🔴 RULE #9: PERFORMANCE REQUIREMENTS
+
+**MANDATORY:**
+- Page load time < 3 seconds
+- Use `{% stylesheet %}` and `{% javascript %}` tags (not external files)
+- Optimize images with `image_url` filter
+- Use `{% preload_tag %}` for critical assets
+- Minimize Liquid loops (max 50 iterations per `for` loop)
+
+**Image Optimization:**
+```liquid
+{{ product.featured_image | image_url: width: 800 | image_tag }}
+```
+
+---
+
+## 🔴 RULE #10: SHOPIFY FILTERS AND OBJECTS
+
+**Use Shopify Liquid objects and filters correctly:**
+
+**Common Objects:**
+- `product` - Product data
+- `collection` - Collection data
+- `cart` - Shopping cart
+- `shop` - Shop information
+- `customer` - Customer data
+
+**Common Filters:**
+- `{{ price | money }}` - Format money
+- `{{ image | image_url: width: 800 }}` - Image URL
+- `{{ 'key' | t }}` - Translation
+- `{{ text | escape }}` - Escape HTML
+
+**Never hardcode product data!** Always use Liquid objects.
+
+---
+
+## 🔴 RULE #11: CODE QUALITY
+
+**Before submitting code, verify:**
+1. ✅ All code is Liquid (no React/Vue/TypeScript)
+2. ✅ All styling uses `design.json` values
+3. ✅ RTL support is implemented
+4. ✅ All text uses translation filters
+5. ✅ `{% schema %}` block is included (sections/blocks)
+6. ✅ `{% doc %}` tag is included (snippets/blocks)
+7. ✅ Mobile-responsive
+8. ✅ Uses `section.id` or `block.id` for unique CSS classes
+9. ✅ No hardcoded product-specific data
+10. ✅ Follows Shopify Liquid best practices
+
+---
+
+## 🔴 RULE #12: WORKFLOW PROCESS
+
+**Design Validation Process (BEFORE building sections):**
+1. Create design.json from design inspiration screenshots
+2. Build sections/component-showcase.liquid to validate all design.json values
+3. Test showcase in theme editor - does everything look correct?
+4. **If not → fix design.json, NOT the code!**
+5. Only after showcase is perfect → start building real sections
+
+**When creating new sections/blocks/snippets:**
+
+1. **Check design.json first** - Does it have the values you need?
+2. **Create the file** - Use correct directory (`sections/`, `blocks/`, `snippets/`)
+3. **Add documentation** - `{% doc %}` tag with `@param` for snippets/blocks
+4. **Add styling** - Use `{% stylesheet %}` with `design.json` values
+5. **Add schema** - `{% schema %}` block for sections/blocks
+6. **Test RTL** - Verify Hebrew text and layout
+7. **Test mobile** - Verify responsive design
+8. **Add translations** - Update `locales/en.default.json`
+
+---
+
+## 🔴 RULE #13: NEVER DO THESE THINGS
+
+❌ **NEVER:**
+- Write React, Vue, or any framework code
+- Hardcode colors, spacing, or typography (use `design.json`)
+- Hardcode Hebrew text (use translation filters)
+- Create product-specific templates (use `product.json` for all products)
+- Skip RTL support
+- Skip mobile responsiveness
+- Skip `{% schema %}` blocks
+- Use external CSS/JS files (use `{% stylesheet %}` and `{% javascript %}`)
+- Create duplicate code (use snippets for reusable parts)
+- Hardcode product data (use Liquid objects)
+
+---
+
+## 🔴 RULE #14: IMAGE OPTIMIZATION
+
+**MANDATORY for all images:**
+
+```liquid
+{%- comment -%} Product images {%- endcomment -%}
+{{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
+
+{%- comment -%} Collection banners {%- endcomment -%}
+{{ collection.image | image_url: width: 1920 | image_tag: loading: 'lazy' }}
+
+{%- comment -%} Section background images {%- endcomment -%}
+{{ section.settings.image | image_url: width: 1920 | image_tag: loading: 'lazy' }}
+```
+
+**Image Size Guidelines:**
+- Product grid thumbnails: 400-600px
+- Product page main image: 800-1200px  
+- Hero/banner images: 1920px
+- Small thumbnails: 100-200px
+
+**Always use:**
+- `loading: 'lazy'` attribute (except above-the-fold hero images)
+- Shopify `image_url` filter with explicit width
+- Descriptive `alt` text for accessibility
+
+---
+
+## 📋 QUICK REFERENCE CHECKLIST
+
+Before writing ANY code, ask yourself:
+
+- [ ] Is this Liquid code only?
+- [ ] Did I check `design.json` for styling values?
+- [ ] Is RTL support included?
+- [ ] Are translations used for all text?
+- [ ] Is `{% schema %}` included (sections/blocks)?
+- [ ] Is `{% doc %}` included (snippets/blocks)?
+- [ ] Is it mobile-responsive?
+- [ ] Are CSS classes unique (using `section.id`/`block.id`)?
+- [ ] Is it reusable (not hardcoded)?
+- [ ] Does it follow Shopify best practices?
+
+---
+
+## 📚 REFERENCE FILES
+
+Always refer to these files for context:
+- `dawn/PROJECT_CONTEXT.md` - Full project context and requirements
+- `dawn/DESIGN_WORKFLOW_JASON.md` - Design workflow and process
+- `dawn/design.json` - Design system values
+- `dawn/AGENTS.md` - Shopify Liquid documentation
+
+---
+
+## 🚨 MANDATORY SHOPIFY API CALL
+
+**When working with Liquid themes, you MUST call `learn_shopify_api` first:**
+- Use `mcp_shopify-dev-mcp_learn_shopify_api` with `api: "liquid"`
+- Extract the `conversationId` from the response
+- Pass the same `conversationId` to all subsequent Shopify tool calls
+
+---
+
+## 📝 COMPLETE SECTION EXAMPLE
+
+This example demonstrates all rules in action:
+
+```liquid
+{%- comment -%}
+  sections/hero.liquid
+  Hero section for homepage with background image and CTA
+{%- endcomment -%}
+
+<section class="hero" id="hero-{{ section.id }}">
+  <div class="hero__container">
+    <h1 class="hero__title">{{ section.settings.title }}</h1>
+    <p class="hero__subtitle">{{ section.settings.subtitle }}</p>
+    {%- if section.settings.cta_text != blank -%}
+      <a href="{{ section.settings.cta_link }}" class="hero__button">
+        {{ section.settings.cta_text }}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  #hero-{{ section.id }} {
+    direction: rtl;
+    text-align: right;
+    background-image: url({{ section.settings.background_image | image_url: width: 1920 }});
+    background-size: cover;
+    background-position: center;
+    padding: 4rem 1.5rem;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+  }
+  
+  #hero-{{ section.id }} .hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  #hero-{{ section.id }} .hero__title {
+    font-family: 'Heebo', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: right;
+  }
+  
+  #hero-{{ section.id }} .hero__subtitle {
+    font-family: 'Assistant', sans-serif;
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    text-align: right;
+  }
+  
+  #hero-{{ section.id }} .hero__button {
+    display: inline-block;
+    background: #CDB9A2;
+    color: #FFFFFF;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'Assistant', sans-serif;
+  }
+  
+  @media (min-width: 768px) {
+    #hero-{{ section.id }} .hero__title {
+      font-size: 3.5rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "כותרת ראשית",
+      "default": "ריהוט תינוקות איכותי"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "תת כותרת",
+      "default": "משלוח חינם לכל הארץ"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "טקסט כפתור"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "קישור כפתור"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "תמונת רקע"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}
+```
+
+**This example demonstrates:**
+✅ RTL support (direction: rtl, text-align: right)
+✅ Hebrew fonts (Heebo for headings, Assistant for body)
+✅ Unique CSS scope (#hero-{{ section.id }})
+✅ Mobile-responsive (@media queries)
+✅ Image optimization (image_url filter with width)
+✅ Schema with Hebrew labels
+✅ Conditional rendering ({%- if -%})
+✅ Proper Liquid comments
+
+---
+
+## 🔴 RULE #15: CORE PRINCIPLE – NEVER EDIT DAWN'S ORIGINAL SECTIONS
+
+**NEVER edit core Dawn theme files directly. Always extend via new custom sections instead.**
+
+- Editing core Dawn files (for example: `main-product.liquid`, `featured-collection.liquid`, `theme.liquid`, `header.liquid`, `footer.liquid`) can cause **loss of customizations** when the theme is updated or reinstalled.
+- **Always create NEW section files** in the `sections/` directory instead of modifying Dawn’s original sections.
+- **Naming convention for all custom sections:**
+  - `custom-[feature-name].liquid`
+  - Examples:
+    - `custom-hero.liquid`
+    - `custom-testimonials.liquid`
+    - `custom-product-usp.liquid`
+- For **minor tweaks only** (small text blocks, extra HTML, one-off content):
+  - Prefer using Dawn’s built‑in **“Custom Liquid”** blocks **inside the Theme Editor** instead of creating or editing files.
+- When a change *seems* to require editing a core file:
+  - First, try:
+    - A new `custom-*.liquid` section that you add to the relevant template
+    - Or a “Custom Liquid” block in an existing section
+  - Only if absolutely impossible, and **with explicit warning**, consider touching core Dawn code.
+
+---
+
+## 🔴 RULE #16: SECTION CREATION STANDARDS
+
+**Every new custom section MUST be fully configurable and visible in the Theme Editor.**
+
+- **Schema block (MANDATORY):**
+  - Every new section MUST include a **complete** `{% schema %}` block.
+  - Schema MUST define:
+    - `"name"` – human‑readable name (use translations where possible)
+    - `"settings"` – all configurable options for the section
+    - `"blocks"` – for repeatable/dynamic content (for example: list of testimonials, feature items, icons, etc.) where relevant
+    - `"presets"` – so the section appears in the “Add section” list in the Theme Editor.
+- **Presets (MANDATORY):**
+  - Every section MUST define at least one preset:
+    ```json
+    "presets": [
+      {
+        "name": "Custom [Feature Name]",
+        "category": "Custom"
+      }
+    ]
+    ```
+  - This ensures the section is visible and addable from the Theme Editor UI.
+
+- **Input types (MANDATORY):**
+  - Choose input `type` according to the actual functionality of the section:
+    - `text` – קצר, שורה אחת
+    - `textarea` / `richtext` – טקסט ארוך/מעוצב
+    - `image_picker` – בחירת תמונה
+    - `url` – קישור
+    - `color` – בחירת צבע (אם לא מנוהל דרך `design.json`)
+    - `range` – ערך נומרי עם טווח (spacing, number of columns, opacity)
+    - `select` – בחירה מתוך רשימה סגורה (layout, alignment, style)
+    - `checkbox` – דגל on/off (להציג/להסתיר אלמנט)
+  - לכל שדה:
+    - `id` ברור ב־snake_case (לדוגמה: `hero_heading`, `cta_label`, `background_image`)
+    - `label` עם מפתח תרגום (`t:`) כשאפשר
+    - `default` הגיוני שמייצר תצוגה טובה כברירת מחדל.
+
+- **Blocks for repeatable content:**
+  - עבור תוכן שחוזר על עצמו (כרטיסי פיצ'ר, המלצות, אייקונים, שורות טקסט):
+    - הוסף `"blocks"` ל־schema.
+    - השתמש ב־`block.settings.*` בתוך ה־HTML.
+    - אל תשכפל div‑ים ידנית בקוד – תן למשתמש להוסיף/להוריד בלוקים בעריכה.
+
+- **Semantic HTML:**
+  - השתמש בשדות `"tag"` ו־`"class"` ב־schema כאשר מתאים:
+    - `"tag": "section"`
+    - `"class": "custom-section custom-[feature-name]"`
+  - ב־HTML:
+    - הוסף classes עם `section.id` כדי להבטיח scope ייחודי:
+      ```liquid
+      <section class="custom-[feature-name] section-{{ section.id }}">
+      ```
+
+---
+
+## 🔴 RULE #17: FILE ORGANIZATION FOR CUSTOM SECTIONS
+
+- **Naming convention:**
+  - All custom sections MUST be created in `sections/` and their filenames MUST start with `custom-`.
+  - Examples:
+    - `sections/custom-hero.liquid`
+    - `sections/custom-featured-products.liquid`
+    - `sections/custom-product-usp-bar.liquid`
+
+- **Modular & reusable:**
+  - Design every custom section so it can be reused on multiple templates (homepage, collections, product page, etc.).
+  - Avoid product/collection‑specific logic – use Liquid objects (`product`, `collection`, `settings`) and schema settings.
+
+- **Documentation:**
+  - At the top of each custom section, add a clear Liquid comment describing:
+    - What the section does
+    - Where it is intended to be used
+    - Any important settings/blocks
+  - Example:
+    ```liquid
+    {%- comment -%}
+      custom-hero.liquid
+      Reusable hero section with background image, heading, subheading, and CTA button.
+      Intended for homepage and landing pages.
+    {%- endcomment -%}
+    ```
+
+---
+
+## 🔴 RULE #18: SAFETY RULES & WORKFLOW
+
+- **NEVER work on the live theme directly:**
+  - Always duplicate the live theme in Shopify Admin:
+    - `Online Store → Themes → Actions → Duplicate`
+  - Work only on the duplicated theme (development/staging), not on the currently published theme.
+
+- **Git & version control (recommended):**
+  - Use Git to track changes in the theme files:
+    - Commit frequently with clear messages.
+    - Use branches for new features/experiments.
+    - Keep `main`/`master` stable and deployable.
+  - When using `shopify theme pull` / `shopify theme push`, ensure your local repo is in sync.
+
+- **Core Dawn safety warnings:**
+  - Before **any** modification to files shipped with Dawn (for example `header.liquid`, `footer.liquid`, `product.liquid`, `collection.liquid`, `theme.liquid`):
+    - Prefer:
+      - New `custom-*` sections
+      - “Custom Liquid” blocks
+    - If still necessary:
+      - Add a **clear warning comment** in the file explaining why a core file was edited.
+      - Make sure the change is tracked in Git with a clear commit message.
+  - Cursor AI should **always**:
+    - Suggest a **custom section** solution first.
+    - Warn explicitly when a requested change would touch a core Dawn file.
+
+---
+
+## 🔴 RULE #19: EXAMPLE CUSTOM SECTION TEMPLATE (STANDARD)
+
+Use this as the baseline structure for all new custom sections:
+
+```liquid
+{%- comment -%}
+  sections/custom-[feature-name].liquid
+  Short description of what this section does and where it's used.
+{%- endcomment -%}
+
+<section class="custom-[feature-name] section-{{ section.id }} page-width">
+  <!-- Custom section content goes here -->
+</section>
+
+{% schema %}
+{
+  "name": "Custom [Feature Name]",
+  "tag": "section",
+  "class": "custom-section custom-[feature-name]",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Default heading"
+    }
+  ],
+  "blocks": [
+
+  ],
+  "presets": [
+    {
+      "name": "Custom [Feature Name]",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+```
+
+---
+
+**Remember: When in doubt, check the reference files first. Consistency is key!**
+

@@ -1,0 +1,235 @@
+{
+  "colors": {
+    "primary": "#CDB9A2",
+    "primaryDark": "#B8A68F",
+    "primaryLight": "#E5D9C8",
+    "primaryGradient": {
+      "start": "#E5D4C0",
+      "middle": "#CDB9A2",
+      "end": "#B8A68F",
+      "hoverStart": "#D4C4B0",
+      "hoverMiddle": "#B8A68F",
+      "hoverEnd": "#A8957F"
+    },
+    "secondary": "#F5F5F5",
+    "background": "#FFFFFF",
+    "backgroundSecondary": "#F9F9F9",
+    "text": "#333333",
+    "textSecondary": "#666666",
+    "textLight": "#999999",
+    "border": "#E0E0E0",
+    "borderLight": "#F0F0F0",
+    "error": "#D32F2F",
+    "success": "#4CAF50",
+    "clubPrice": "#CDB9A2"
+  },
+  "typography": {
+    "fontFamily": {
+      "primary": "'Assistant', sans-serif",
+      "heading": "'Heebo', sans-serif",
+      "fallback": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+    },
+    "fontSizes": {
+      "xs": "12px",
+      "sm": "14px",
+      "base": "16px",
+      "lg": "18px",
+      "xl": "20px",
+      "2xl": "24px",
+      "3xl": "28px",
+      "4xl": "32px",
+      "5xl": "36px"
+    },
+    "fontWeights": {
+      "light": "300",
+      "normal": "400",
+      "medium": "500",
+      "semibold": "600",
+      "bold": "700"
+    },
+    "lineHeights": {
+      "tight": "1.2",
+      "normal": "1.5",
+      "relaxed": "1.75"
+    }
+  },
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "12px",
+    "base": "16px",
+    "lg": "24px",
+    "xl": "32px",
+    "2xl": "48px",
+    "3xl": "64px"
+  },
+  "borders": {
+    "radius": {
+      "none": "0",
+      "sm": "8px",
+      "md": "12px",
+      "lg": "16px",
+      "xl": "20px",
+      "full": "9999px"
+    },
+    "width": {
+      "thin": "1px",
+      "medium": "2px",
+      "thick": "3px"
+    },
+    "style": "solid"
+  },
+  "shadows": {
+    "none": "none",
+    "sm": "0 1px 2px rgba(0, 0, 0, 0.05)",
+    "md": "0 4px 6px rgba(0, 0, 0, 0.1)",
+    "lg": "0 10px 15px rgba(0, 0, 0, 0.1)",
+    "button": {
+      "default": "0 4px 12px rgba(205, 185, 162, 0.3), 0 2px 4px rgba(184, 166, 143, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+      "hover": "0 6px 16px rgba(205, 185, 162, 0.4), 0 3px 6px rgba(184, 166, 143, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15)"
+    }
+  },
+  "transitions": {
+    "fast": "150ms ease",
+    "normal": "250ms ease",
+    "slow": "500ms ease",
+    "buttonHover": "all 250ms ease",
+    "shimmer": "left 0.5s ease"
+  },
+  "breakpoints": {
+    "mobile": "768px",
+    "tablet": "1024px",
+    "desktop": "1280px"
+  },
+  "components": {
+    "button": {
+      "primary": {
+        "background": "linear-gradient(135deg, #E5D4C0 0%, #CDB9A2 50%, #B8A68F 100%)",
+        "backgroundHover": "linear-gradient(135deg, #D4C4B0 0%, #B8A68F 50%, #A8957F 100%)",
+        "color": "#FFFFFF",
+        "border": "none",
+        "borderRadius": "12px",
+        "padding": "12px 24px",
+        "fontSize": "16px",
+        "fontWeight": "500",
+        "fontFamily": "'Assistant', sans-serif",
+        "boxShadow": "0 4px 12px rgba(205, 185, 162, 0.3), 0 2px 4px rgba(184, 166, 143, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+        "boxShadowHover": "0 6px 16px rgba(205, 185, 162, 0.4), 0 3px 6px rgba(184, 166, 143, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
+        "transformHover": "translateY(-1px)",
+        "transition": "all 250ms ease",
+        "shimmer": {
+          "enabled": true,
+          "gradient": "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)",
+          "duration": "0.5s ease"
+        }
+      },
+      "secondary": {
+        "background": "transparent",
+        "backgroundHover": "#F5F5F5",
+        "color": "#333333",
+        "border": "1px solid #E0E0E0",
+        "borderRadius": "12px",
+        "padding": "12px 24px",
+        "fontSize": "16px",
+        "fontWeight": "500",
+        "fontFamily": "'Assistant', sans-serif",
+        "transition": "all 250ms ease"
+      },
+      "icon": {
+        "background": "linear-gradient(135deg, #E5D4C0 0%, #CDB9A2 50%, #B8A68F 100%)",
+        "backgroundHover": "linear-gradient(135deg, #D4C4B0 0%, #B8A68F 50%, #A8957F 100%)",
+        "color": "#FFFFFF",
+        "borderRadius": "50%",
+        "width": "40px",
+        "height": "40px",
+        "fontSize": "18px",
+        "boxShadow": "0 4px 12px rgba(205, 185, 162, 0.3), 0 2px 4px rgba(184, 166, 143, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+        "boxShadowHover": "0 6px 16px rgba(205, 185, 162, 0.4), 0 3px 6px rgba(184, 166, 143, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
+        "transformHover": "translateY(-1px) scale(1.05)",
+        "transition": "all 250ms ease"
+      }
+    },
+    "productCard": {
+      "background": "#FFFFFF",
+      "border": "1px solid #F0F0F0",
+      "borderRadius": "16px",
+      "padding": "0",
+      "gap": "12px",
+      "image": {
+        "borderRadius": "12px",
+        "aspectRatio": "1 / 1",
+        "objectFit": "cover"
+      },
+      "content": {
+        "padding": "12px 12px 16px"
+      },
+      "brand": {
+        "fontSize": "12px",
+        "fontWeight": "400",
+        "color": "#999999",
+        "marginBottom": "4px"
+      },
+      "title": {
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "fontFamily": "'Assistant', sans-serif",
+        "color": "#333333",
+        "marginBottom": "8px"
+      },
+      "prices": {
+        "gap": "2px",
+        "marginBottom": "12px"
+      },
+      "price": {
+        "fontSize": "18px",
+        "fontWeight": "600",
+        "color": "#333333"
+      },
+      "clubPrice": {
+        "fontSize": "14px",
+        "fontWeight": "500",
+        "color": "#CDB9A2"
+      },
+      "actions": {
+        "gap": "8px",
+        "display": "flex",
+        "alignItems": "center"
+      }
+    },
+    "cart": {
+      "item": {
+        "background": "#FFFFFF",
+        "border": "1px solid #F0F0F0",
+        "borderRadius": "12px",
+        "padding": "16px",
+        "gap": "12px"
+      },
+      "itemImage": {
+        "width": "120px",
+        "aspectRatio": "1 / 1",
+        "borderRadius": "8px"
+      },
+      "quantitySelector": {
+        "border": "1px solid #E0E0E0",
+        "borderRadius": "8px",
+        "buttonSize": "36px",
+        "inputWidth": "50px"
+      },
+      "summary": {
+        "background": "#F9F9F9",
+        "border": "1px solid #F0F0F0",
+        "borderRadius": "12px",
+        "padding": "24px"
+      }
+    },
+    "collectionGrid": {
+      "gap": "24px",
+      "columns": {
+        "mobile": "1",
+        "tablet": "2",
+        "desktop": "3",
+        "large": "4"
+      }
+    }
+  }
+}

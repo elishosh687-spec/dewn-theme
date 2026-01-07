@@ -1,0 +1,647 @@
+{%- comment -%}
+  Component Showcase Section
+  This section displays all basic design components according to design.json
+  Used for testing and validating the design system before building real sections
+  ALL values must come from design.json - if something looks wrong, fix design.json, not this code!
+{%- endcomment -%}
+
+{%- style -%}
+  /* Base Container - using design.json spacing */
+  .component-showcase-{{ section.id }} {
+    padding: 32px 16px; /* design.json spacing: xl, md */
+    background: #FFFFFF; /* design.json colors.background */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* design.json typography.fontFamily.primary */
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 768px) {
+    .component-showcase-{{ section.id }} {
+      padding: 48px 32px; /* design.json spacing: 2xl, xl */
+    }
+  }
+
+  /* Section Dividers */
+  .component-showcase-{{ section.id }} .showcase-section {
+    margin-bottom: 48px; /* design.json spacing: 2xl */
+    padding-bottom: 32px; /* design.json spacing: xl */
+    border-bottom: 1px solid #E0E0E0; /* design.json colors.border */
+  }
+
+  .component-showcase-{{ section.id }} .showcase-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .component-showcase-{{ section.id }} .showcase-title {
+    font-size: 24px; /* design.json typography.fontSizes.2xl */
+    font-weight: 600; /* design.json typography.fontWeights.semibold */
+    line-height: 1.2; /* design.json typography.lineHeights.tight */
+    color: #333333; /* design.json colors.text */
+    margin: 0 0 24px 0; /* design.json spacing: 0, 0, lg, 0 */
+    font-family: inherit;
+  }
+
+  /* Buttons - using design.json button values */
+  .component-showcase-{{ section.id }} .btn-primary {
+    background: #D4C2B0; /* design.json components.button.primary.background */
+    color: #FFFFFF; /* design.json components.button.primary.text */
+    border-radius: 6px; /* design.json components.button.primary.borderRadius */
+    padding: 12px 24px; /* design.json components.button.primary.padding */
+    font-weight: 500; /* design.json components.button.primary.fontWeight */
+    font-size: 16px; /* design.json components.button.primary.fontSize */
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    transition: all 300ms ease-in-out; /* design.json transitions.normal + easing */
+    font-family: inherit;
+  }
+
+  .component-showcase-{{ section.id }} .btn-primary:hover {
+    opacity: 0.9;
+  }
+
+  .component-showcase-{{ section.id }} .btn-secondary {
+    background: transparent; /* design.json components.button.secondary.background */
+    color: #333333; /* design.json components.button.secondary.text */
+    border: 1px solid #333333; /* design.json components.button.secondary.border */
+    border-radius: 6px; /* design.json components.button.secondary.borderRadius */
+    padding: 12px 24px; /* design.json components.button.secondary.padding */
+    font-weight: 500; /* design.json components.button.secondary.fontWeight */
+    font-size: 16px; /* design.json components.button.secondary.fontSize */
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    transition: all 300ms ease-in-out; /* design.json transitions.normal + easing */
+    font-family: inherit;
+  }
+
+  .component-showcase-{{ section.id }} .btn-secondary:hover {
+    background: #333333;
+    color: #FFFFFF;
+  }
+
+  /* Typography - using design.json typography values */
+  .component-showcase-{{ section.id }} h1 {
+    font-size: 40px; /* design.json typography.fontSizes.4xl */
+    font-weight: 700; /* design.json typography.fontWeights.bold */
+    line-height: 1.2; /* design.json typography.lineHeights.tight */
+    color: #333333; /* design.json colors.text */
+    margin: 0 0 16px 0; /* design.json spacing: 0, 0, md, 0 */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* design.json typography.fontFamily.heading */
+  }
+
+  .component-showcase-{{ section.id }} h2 {
+    font-size: 32px; /* design.json typography.fontSizes.3xl */
+    font-weight: 700; /* design.json typography.fontWeights.bold */
+    line-height: 1.2; /* design.json typography.lineHeights.tight */
+    color: #333333; /* design.json colors.text */
+    margin: 0 0 16px 0; /* design.json spacing: 0, 0, md, 0 */
+    font-family: inherit;
+  }
+
+  .component-showcase-{{ section.id }} h3 {
+    font-size: 24px; /* design.json typography.fontSizes.2xl */
+    font-weight: 600; /* design.json typography.fontWeights.semibold */
+    line-height: 1.2; /* design.json typography.lineHeights.tight */
+    color: #333333; /* design.json colors.text */
+    margin: 0 0 16px 0; /* design.json spacing: 0, 0, md, 0 */
+    font-family: inherit;
+  }
+
+  .component-showcase-{{ section.id }} p {
+    font-size: 16px; /* design.json typography.fontSizes.base */
+    font-weight: 400; /* design.json typography.fontWeights.normal */
+    line-height: 1.5; /* design.json typography.lineHeights.normal */
+    color: #333333; /* design.json colors.text */
+    margin: 0 0 16px 0; /* design.json spacing: 0, 0, md, 0 */
+    font-family: inherit;
+  }
+
+  .component-showcase-{{ section.id }} .text-light {
+    color: #666666; /* design.json colors.textLight */
+  }
+
+  /* Product Card - using design.json productCard values */
+  .component-showcase-{{ section.id }} .product-card {
+    background: #FFFFFF; /* design.json components.productCard.background */
+    border-radius: 0; /* design.json components.productCard.borderRadius */
+    padding: 16px; /* design.json components.productCard.padding */
+    border: 1px solid #E0E0E0; /* design.json colors.border */
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .component-showcase-{{ section.id }} .product-card-image {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* design.json components.productCard.imageAspectRatio */
+    background: #F8F8F0; /* design.json colors.backgroundSecondary */
+    margin-bottom: 16px; /* design.json spacing.md */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666666; /* design.json colors.textLight */
+    font-size: 14px; /* design.json typography.fontSizes.sm */
+  }
+
+  .component-showcase-{{ section.id }} .product-card-name {
+    font-size: 18px; /* design.json components.productCard.productNameSize */
+    font-weight: 600; /* design.json components.productCard.productNameWeight */
+    color: #333333; /* design.json colors.text */
+    margin-bottom: 8px; /* design.json spacing.sm */
+    font-family: inherit;
+  }
+
+  .component-showcase-{{ section.id }} .product-card-price {
+    font-size: 20px; /* design.json components.productCard.priceSize */
+    font-weight: 700; /* design.json components.productCard.priceWeight */
+    color: #333333; /* design.json colors.text */
+    margin-bottom: 4px; /* design.json spacing.xs */
+    font-family: inherit;
+  }
+
+  .component-showcase-{{ section.id }} .product-card-original-price {
+    font-size: 16px; /* design.json components.productCard.originalPriceSize */
+    color: #666666; /* design.json components.productCard.originalPriceColor */
+    text-decoration: line-through; /* design.json components.productCard.originalPriceDecoration */
+    margin-bottom: 16px; /* design.json spacing.md */
+    font-family: inherit;
+  }
+
+  /* Discount Badge - using design.json discountBadge values */
+  .component-showcase-{{ section.id }} .discount-badge {
+    background: #E74C3C; /* design.json components.discountBadge.background */
+    color: #FFFFFF; /* design.json components.discountBadge.text */
+    padding: 4px 8px; /* design.json components.discountBadge.padding */
+    border-radius: 0; /* design.json components.discountBadge.borderRadius */
+    font-size: 14px; /* design.json components.discountBadge.fontSize */
+    font-weight: 600; /* design.json components.discountBadge.fontWeight */
+    display: inline-block;
+    margin-bottom: 8px; /* design.json spacing.sm */
+    font-family: inherit;
+  }
+
+  /* Input Field */
+  .component-showcase-{{ section.id }} .input-field {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 16px; /* design.json spacing: sm, md */
+    border: 1px solid #E0E0E0; /* design.json colors.border */
+    border-radius: 6px; /* design.json borders.radius.md */
+    font-size: 16px; /* design.json typography.fontSizes.base */
+    font-family: inherit;
+    color: #333333; /* design.json colors.text */
+    margin-bottom: 16px; /* design.json spacing.md */
+  }
+
+  .component-showcase-{{ section.id }} .input-field:focus {
+    outline: none;
+    border-color: #D4C2B0; /* design.json colors.primary */
+  }
+
+  /* Links */
+  .component-showcase-{{ section.id }} a.link {
+    color: #333333; /* design.json colors.text */
+    text-decoration: underline;
+    font-size: 16px; /* design.json typography.fontSizes.base */
+    transition: color 300ms ease-in-out; /* design.json transitions.normal + easing */
+    font-family: inherit;
+  }
+
+  .component-showcase-{{ section.id }} a.link:hover {
+    color: #D4C2B0; /* design.json colors.primary */
+  }
+
+  /* Lists */
+  .component-showcase-{{ section.id }} ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0; /* design.json spacing: 0, 0, md, 0 */
+  }
+
+  .component-showcase-{{ section.id }} ul li {
+    padding: 8px 0; /* design.json spacing.sm, 0 */
+    font-size: 16px; /* design.json typography.fontSizes.base */
+    color: #333333; /* design.json colors.text */
+    border-bottom: 1px solid #E0E0E0; /* design.json colors.border */
+    font-family: inherit;
+  }
+
+  .component-showcase-{{ section.id }} ul li:last-child {
+    border-bottom: none;
+  }
+
+  /* Color Palette Display */
+  .component-showcase-{{ section.id }} .color-swatch {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #E0E0E0; /* design.json colors.border */
+    margin-right: 16px; /* design.json spacing.md */
+    margin-bottom: 16px; /* design.json spacing.md */
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .component-showcase-{{ section.id }} .color-label {
+    font-size: 12px; /* design.json typography.fontSizes.xs */
+    color: #666666; /* design.json colors.textLight */
+    margin-top: 8px; /* design.json spacing.sm */
+    font-family: inherit;
+  }
+
+  /* Button Group */
+  .component-showcase-{{ section.id }} .button-group {
+    display: flex;
+    gap: 16px; /* design.json spacing.md */
+    flex-wrap: wrap;
+    margin-bottom: 16px; /* design.json spacing.md */
+  }
+
+  /* Navigation Bar - using design.json navigationBar values */
+  .component-showcase-{{ section.id }} .nav-bar-wrapper {
+    width: 100%;
+    margin-bottom: 48px; /* design.json spacing: 2xl */
+  }
+
+  .component-showcase-{{ section.id }} .nav-bar {
+    background: #DDCBAF; /* design.json components.header.navigationBar.background */
+    padding: 16px 24px; /* design.json components.header.navigationBar.padding */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  @media screen and (min-width: 768px) {
+    .component-showcase-{{ section.id }} .nav-bar {
+      padding: 16px 48px; /* design.json components.header.navigationBar.paddingDesktop */
+    }
+  }
+
+  .component-showcase-{{ section.id }} .nav-items {
+    display: flex;
+    gap: 32px; /* design.json components.header.navigationBar.itemGap */
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    min-width: max-content;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .component-showcase-{{ section.id }} .nav-items {
+      gap: 48px; /* design.json components.header.navigationBar.itemGapDesktop */
+    }
+  }
+
+  .component-showcase-{{ section.id }} .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; /* design.json spacing.sm */
+    text-decoration: none;
+    color: #FFFFFF; /* design.json components.header.navigationBar.textColor */
+    transition: opacity 300ms ease-in-out; /* design.json transitions.normal + easing */
+    min-width: 80px; /* design.json components.header.navigationBar.itemMinWidth */
+    flex-shrink: 0;
+  }
+
+  .component-showcase-{{ section.id }} .nav-item:hover {
+    opacity: 0.8;
+  }
+
+  .component-showcase-{{ section.id }} .nav-icon {
+    width: 32px; /* design.json components.header.navigationBar.iconSize */
+    height: 32px; /* design.json components.header.navigationBar.iconSize */
+    color: #FFFFFF; /* design.json components.header.navigationBar.textColor */
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .component-showcase-{{ section.id }} .nav-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    fill: none;
+  }
+
+  .component-showcase-{{ section.id }} .nav-text {
+    font-size: 14px; /* design.json components.header.navigationBar.textSize */
+    font-weight: 500; /* design.json components.header.navigationBar.fontWeight */
+    line-height: 1.2; /* design.json typography.lineHeights.tight */
+    color: #FFFFFF; /* design.json components.header.navigationBar.textColor */
+    text-align: center;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+
+  /* Sale Badge Icon in Navigation */
+  .component-showcase-{{ section.id }} .sale-badge-icon {
+    position: relative;
+    width: 32px; /* design.json components.header.saleBadge.size */
+    height: 32px; /* design.json components.header.saleBadge.size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .component-showcase-{{ section.id }} .sale-badge-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .component-showcase-{{ section.id }} .sale-badge-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px; /* design.json components.header.saleBadge.textSize */
+    font-weight: 700; /* design.json components.header.saleBadge.fontWeight */
+    color: #FFFFFF; /* design.json components.header.saleBadge.textColor */
+    line-height: 1;
+    font-family: inherit;
+  }
+
+  /* Top Slogan Text */
+  .component-showcase-{{ section.id }} .nav-slogan {
+    text-align: center;
+    font-size: 14px; /* design.json typography.fontSizes.sm */
+    color: #333333; /* design.json colors.text */
+    margin-bottom: 16px; /* design.json spacing.md */
+    font-family: inherit;
+  }
+
+
+  /* Responsive */
+  @media screen and (max-width: 767px) {
+    .component-showcase-{{ section.id }} {
+      padding: 24px 16px; /* design.json spacing: lg, md */
+    }
+
+    .component-showcase-{{ section.id }} .showcase-section {
+      margin-bottom: 32px; /* design.json spacing.xl */
+      padding-bottom: 24px; /* design.json spacing.lg */
+    }
+
+    .component-showcase-{{ section.id }} h1 {
+      font-size: 32px; /* design.json typography.fontSizes.3xl */
+    }
+
+    .component-showcase-{{ section.id }} h2 {
+      font-size: 24px; /* design.json typography.fontSizes.2xl */
+    }
+  }
+{%- endstyle -%}
+
+<div class="component-showcase-{{ section.id }}">
+  <h1>Component Showcase</h1>
+  <p>This section displays all basic design components according to design.json. Use this to validate the design system before building real sections.</p>
+  <p class="text-light">If something looks wrong, fix design.json, not this code!</p>
+
+  <!-- Navigation Bar Section -->
+  <div class="showcase-section">
+    <h2 class="showcase-title">Navigation Bar</h2>
+    <p class="nav-slogan">מקסימום לקטנים במינימום מחירים</p>
+    <div class="nav-bar-wrapper">
+      <div class="nav-bar">
+        <div class="nav-items">
+          <!-- Sale Badge Item -->
+          <a href="#" class="nav-item">
+            <div class="nav-icon sale-badge-icon">
+              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 4L20 12L28 14L20 16L16 24L12 16L4 14L12 12L16 4Z" fill="#E74C3C"/>
+              </svg>
+              <span class="sale-badge-text">SALE</span>
+            </div>
+            <span class="nav-text">חדש</span>
+          </a>
+          <!-- Other Navigation Items -->
+          <a href="#" class="nav-item">
+            <div class="nav-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 8C10.5 8 9 9.5 9 11C9 12.5 10.5 14 12 14C13.5 14 15 12.5 15 11C15 9.5 13.5 8 12 8Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <span class="nav-text">חבילות לידה</span>
+          </a>
+          <a href="#" class="nav-item">
+            <div class="nav-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 6H16L18 10H20C20.5523 10 21 10.4477 21 11V19C21 19.5523 20.5523 20 20 20H4C3.44772 20 3 19.5523 3 19V11C3 10.4477 3.44772 10 4 10H6L8 6Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6" stroke="currentColor" stroke-width="2" fill="none"/>
+              </svg>
+            </div>
+            <span class="nav-text">הנקה והאכלה</span>
+          </a>
+          <a href="#" class="nav-item">
+            <div class="nav-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="6" width="16" height="12" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                <circle cx="8" cy="12" r="1" fill="currentColor"/>
+                <circle cx="12" cy="12" r="1" fill="currentColor"/>
+                <circle cx="16" cy="12" r="1" fill="currentColor"/>
+              </svg>
+            </div>
+            <span class="nav-text">אמבט וטיפול בתינוק</span>
+          </a>
+          <a href="#" class="nav-item">
+            <div class="nav-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 8H18L17 20H7L6 8Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6" stroke="currentColor" stroke-width="2" fill="none"/>
+              </svg>
+            </div>
+            <span class="nav-text">טקסטיל וביגוד</span>
+          </a>
+          <a href="#" class="nav-item">
+            <div class="nav-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="8" cy="18" r="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                <circle cx="18" cy="18" r="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M4 18H2V6H6L8 10H18L20 14H22" stroke="currentColor" stroke-width="2" fill="none"/>
+              </svg>
+            </div>
+            <span class="nav-text">על גלגלים</span>
+          </a>
+          <a href="#" class="nav-item">
+            <div class="nav-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M6 16C6 13.7909 7.79086 12 10 12H14C16.2091 12 18 13.7909 18 16" stroke="currentColor" stroke-width="2" fill="none"/>
+                <circle cx="8" cy="20" r="1" fill="currentColor"/>
+                <circle cx="16" cy="20" r="1" fill="currentColor"/>
+              </svg>
+            </div>
+            <span class="nav-text">צעצועים</span>
+          </a>
+          <a href="#" class="nav-item">
+            <div class="nav-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="8" width="12" height="10" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M8 8V6C8 5.44772 8.44772 5 9 5H15C15.5523 5 16 5.44772 16 6V8" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M10 12H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="nav-text">כסאות אוכל</span>
+          </a>
+          <a href="#" class="nav-item">
+            <div class="nav-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="5" y="6" width="14" height="12" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M12 10V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="nav-text">כסאות בטיחות</span>
+          </a>
+          <a href="#" class="nav-item">
+            <div class="nav-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 18C6 16.8954 6.89543 16 8 16H16C17.1046 16 18 16.8954 18 18" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M4 18H20" stroke="currentColor" stroke-width="2"/>
+                <circle cx="8" cy="20" r="1" fill="currentColor"/>
+                <circle cx="16" cy="20" r="1" fill="currentColor"/>
+                <path d="M8 18V10C8 8.89543 8.89543 8 10 8H14C15.1046 8 16 8.89543 16 10V18" stroke="currentColor" stroke-width="2" fill="none"/>
+              </svg>
+            </div>
+            <span class="nav-text">עגלות וטיולונים</span>
+          </a>
+          <a href="#" class="nav-item">
+            <div class="nav-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="6" width="16" height="14" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M4 10H20" stroke="currentColor" stroke-width="2"/>
+                <path d="M4 14H20" stroke="currentColor" stroke-width="2"/>
+                <circle cx="8" cy="8" r="1" fill="currentColor"/>
+                <circle cx="16" cy="8" r="1" fill="currentColor"/>
+              </svg>
+            </div>
+            <span class="nav-text">ריהוט</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <p class="text-light" style="margin-top: 16px;">Background: #DDCBAF, Text: #FFFFFF, Icons: 24px, Text: 14px</p>
+  </div>
+
+  <!-- Buttons Section -->
+  <div class="showcase-section">
+    <h2 class="showcase-title">Buttons</h2>
+    <div class="button-group">
+      <a href="#" class="btn-primary">הוסף לסל</a>
+      <a href="#" class="btn-secondary">למידע נוסף</a>
+    </div>
+    <p class="text-light">Primary button: background #D4C2B0, Secondary button: transparent with border</p>
+  </div>
+
+  <!-- Typography Section -->
+  <div class="showcase-section">
+    <h2 class="showcase-title">Typography</h2>
+    <h1>Heading 1 - 40px Bold</h1>
+    <h2>Heading 2 - 32px Bold</h2>
+    <h3>Heading 3 - 24px Semibold</h3>
+    <p>Body text - 16px Regular. This is a sample paragraph to demonstrate the typography system. The font family is a clean sans-serif that works well for e-commerce.</p>
+    <p class="text-light">Light text - 16px Regular in #666666 color</p>
+  </div>
+
+  <!-- Product Card Section -->
+  <div class="showcase-section">
+    <h2 class="showcase-title">Product Card</h2>
+    <div class="product-card">
+      <div class="discount-badge">₪159 הנחה</div>
+      <div class="product-card-image">Product Image (1:1 ratio)</div>
+      <div class="product-card-name">שידת קמפינה רהיטי סגל - CLASSIC</div>
+      <div class="product-card-price">₪1,449.00</div>
+      <div class="product-card-original-price">₪1,690.00</div>
+      <div class="button-group">
+        <a href="#" class="btn-primary">הוסף לסל</a>
+        <a href="#" class="btn-secondary">למידע נוסף</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Discount Badge Section -->
+  <div class="showcase-section">
+    <h2 class="showcase-title">Discount Badge</h2>
+    <div class="discount-badge">₪159 הנחה</div>
+    <div class="discount-badge" style="margin-left: 8px;">₪50 הנחה</div>
+    <div class="discount-badge" style="margin-left: 8px;">₪160 הנחה</div>
+    <p class="text-light">Background: #E74C3C, Text: #FFFFFF, No border-radius</p>
+  </div>
+
+  <!-- Input Fields Section -->
+  <div class="showcase-section">
+    <h2 class="showcase-title">Input Fields</h2>
+    <input type="text" class="input-field" placeholder="שם מלא">
+    <input type="email" class="input-field" placeholder="אימייל">
+    <p class="text-light">Border: #E0E0E0, Border-radius: 6px, Focus: #D4C2B0</p>
+  </div>
+
+  <!-- Links Section -->
+  <div class="showcase-section">
+    <h2 class="showcase-title">Links</h2>
+    <a href="#" class="link">קישור רגיל</a>
+    <br>
+    <a href="#" class="link">קישור נוסף</a>
+    <p class="text-light">Color: #333333, Hover: #D4C2B0</p>
+  </div>
+
+  <!-- Lists Section -->
+  <div class="showcase-section">
+    <h2 class="showcase-title">Lists</h2>
+    <ul>
+      <li>פריט ראשון ברשימה</li>
+      <li>פריט שני ברשימה</li>
+      <li>פריט שלישי ברשימה</li>
+      <li>פריט רביעי ברשימה</li>
+    </ul>
+  </div>
+
+  <!-- Color Palette Section -->
+  <div class="showcase-section">
+    <h2 class="showcase-title">Color Palette</h2>
+    <div>
+      <div class="color-swatch" style="background: #D4C2B0;"></div>
+      <div class="color-swatch" style="background: #DDCBAF;"></div>
+      <div class="color-swatch" style="background: #E74C3C;"></div>
+      <div class="color-swatch" style="background: #333333;"></div>
+      <div class="color-swatch" style="background: #666666;"></div>
+      <div class="color-swatch" style="background: #F8F8F0;"></div>
+      <div class="color-swatch" style="background: #FFFFFF; border: 2px solid #E0E0E0;"></div>
+    </div>
+    <div style="margin-top: 16px;">
+      <span class="color-label">Primary: #D4C2B0</span>
+      <span class="color-label" style="margin-left: 16px;">Secondary: #DDCBAF</span>
+      <span class="color-label" style="margin-left: 16px;">Accent: #E74C3C</span>
+      <span class="color-label" style="margin-left: 16px;">Text: #333333</span>
+      <span class="color-label" style="margin-left: 16px;">Text Light: #666666</span>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Component Showcase",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Component Showcase Settings"
+    },
+    {
+      "type": "paragraph",
+      "content": "This section displays all basic design components according to design.json. Use this to test and validate the design system. If something looks wrong, fix design.json, not this code!"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Component Showcase"
+    }
+  ]
+}
+{% endschema %}

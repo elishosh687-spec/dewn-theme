@@ -1,0 +1,33 @@
+# Shopify Theme Files
+config/settings_data.json
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
+
+# Node modules (if any)
+node_modules/
+
+# Environment files
+.env
+.env.local
+
+# Shopify CLI
+.shopify/
+

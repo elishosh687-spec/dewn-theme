@@ -1,0 +1,150 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "subtitle"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "square"
+          }
+        },
+        "custom_liquid_YwqmhL": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% liquid\n  assign related_field = product.metafields.custom.related_products\n%}\n\n{% if related_field and related_field.value and related_field.value.size > 0 %}\n  <div class=\"product-related-variants\">\n    {% for related in related_field.value %}\n      <a\n        href=\"{{ related.url }}\"\n        class=\"product-related-variant{% if related.id == product.id %} product-related-variant--active{% endif %}\"\n      >\n        {{ related.featured_image | image_url: width: 80 | image_tag: loading: 'lazy', alt: related.title }}\n      </a>\n    {% endfor %}\n  </div>\n{% endif %}\n\n<style>\n  .product-related-variants {\n    display: flex;\n    flex-wrap: nowrap;\n    gap: 0.5rem;\n    margin-block: 0.75rem;\n    direction: rtl;\n    justify-content: flex-start;\n  }\n\n  .product-related-variant {\n    display: block;\n    width: 70px;\n    height: 70px;\n    padding: 2px;\n    border-radius: 8px;\n    border: 1px solid rgba(0, 0, 0, 0.15);\n    background: #ffffff;\n    box-shadow: none;\n    text-decoration: none;\n    overflow: hidden;\n    transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;\n  }\n\n  .product-related-variant img {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    display: block;\n    border-radius: 6px;\n  }\n\n  .product-related-variant:hover {\n    transform: translateY(-1px);\n  }\n\n  /* המוצר הנוכחי – מסגרת גרדיאנט בצבע המותג */\n  .product-related-variant--active {\n    border: 2px solid transparent;\n    border-radius: 10px;\n    background:\n      linear-gradient(135deg, #E5D4C0 0%, #CDB9A2 50%, #B8A68F 100%) border-box,\n      #ffffff padding-box;\n    box-shadow: 0 0 0 1px rgba(205, 185, 162, 0.7);\n  }\n</style>"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share": {
+          "type": "share",
+          "disabled": true,
+          "settings": {
+            "share_label": "Share"
+          }
+        },
+        "collapsible_tab_97V6V6": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "תיאור פריט",
+            "icon": "none",
+            "content": "<p><strong>{{ product.metafields.custom.product_description.value }}</strong></p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_rakHPf": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "משלוחים והחזרות",
+            "icon": "none",
+            "content": "<p>{{ product.metafields.custom.shipping_returns.value }}</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_DnfUjA": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "תיאור פריט",
+            "icon": "none",
+            "content": "<p>{{ product.metafields.custom.additional_detailss.value }}</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "description",
+        "price",
+        "variant_picker",
+        "custom_liquid_YwqmhL",
+        "quantity_selector",
+        "buy_buttons",
+        "share",
+        "collapsible_tab_97V6V6",
+        "collapsible_tab_rakHPf",
+        "collapsible_tab_DnfUjA"
+      ],
+      "custom_css": [
+        "details summary {font-family: FbTubicSans-Light, sans-serif !important; font-size: 13px !important; font-weight: 400 !important; line-height: 24.7px !important; display: flex; justify-content: space-between; padding: 10px 0 !important;}"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-2",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products"
+  ]
+}

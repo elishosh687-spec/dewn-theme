@@ -1,5 +1,5 @@
 # Shopify Theme Files
-config/settings_data.json
+# config/settings_data.json - Now included in repo
 
 # OS Files
 .DS_Store

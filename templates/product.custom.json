@@ -68,7 +68,7 @@
           "settings": {
             "heading": "תיאור פריט",
             "icon": "none",
-            "content": "<p><strong>{{ product.metafields.custom.product_description.value }}</strong></p>",
+            "content": "<p><strong>{{ product.description }}</strong></p>",
             "page": ""
           }
         },
@@ -77,7 +77,7 @@
           "settings": {
             "heading": "משלוחים והחזרות",
             "icon": "none",
-            "content": "<p>{{ product.metafields.custom.shipping_returns.value }}</p>",
+            "content": "<p>מידע על משלוחים והחזרות יופיע כאן.</p>",
             "page": ""
           }
         },
@@ -86,7 +86,7 @@
           "settings": {
             "heading": "תיאור פריט",
             "icon": "none",
-            "content": "<p>{{ product.metafields.custom.additional_detailss.value }}</p>",
+            "content": "<p>{{ product.description }}</p>",
             "page": ""
           }
         }
@@ -124,6 +124,49 @@
         "padding_bottom": 12
       }
     },
+    "testimonials_social": {
+      "type": "testimonials-social",
+      "settings": {
+        "heading": "מה לקוחות אומרים עלינו",
+        "subheading": "אלפי הורים מרוצים מהמוצרים שלנו",
+        "show_followers": true,
+        "instagram_count": "15000",
+        "facebook_count": "8500",
+        "customers_count": "10000",
+        "layout": "slider",
+        "autoplay_speed": 5,
+        "background_color": "#f9f9f9"
+      },
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "customer_name": "שרה כהן",
+            "review_text": "המוצר הגיע מהר והאיכות מעולה! ממליצה בחום לכל הורה.",
+            "rating": 5,
+            "customer_location": "תל אביב"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "customer_name": "דוד לוי",
+            "review_text": "מיטה איכותית מאוד, הילד ישן מצוין. שירות מעולה!",
+            "rating": 5,
+            "customer_location": "ירושלים"
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "customer_name": "מיכל רוזן",
+            "review_text": "קנינו את כל הריהוט מכאן. הכל מושלם ומעוצב יפה.",
+            "rating": 5,
+            "customer_location": "חיפה"
+          }
+        }
+      }
+    },
     "related-products": {
       "type": "related-products",
       "settings": {
@@ -145,6 +188,7 @@
   },
   "order": [
     "main",
+    "testimonials_social",
     "related-products"
   ]
 }

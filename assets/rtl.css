@@ -681,6 +681,15 @@ html[dir="rtl"] .product__accordion .summary__title {
   width: 100%;
 }
 
+/* Accordion title color – #4D4D4D */
+html[dir="rtl"] .product__accordion .accordion__title,
+html[dir="rtl"] .product__accordion .summary__title .accordion__title,
+html[dir="rtl"] .product__accordion h2.accordion__title,
+html[dir="rtl"] .product__accordion h4.accordion__title,
+html[dir="rtl"] .product__accordion .h4.accordion__title {
+  color: #4D4D4D !important;
+}
+
 html[dir="rtl"] .product__accordion summary .icon-caret {
   position: absolute;
   left: 0;   /* חץ בקצה שמאל */

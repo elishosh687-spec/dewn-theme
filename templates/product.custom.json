@@ -86,7 +86,7 @@
           "settings": {
             "heading": "מידע נוסף",
             "icon": "none",
-            "content": "{{ product.description }}",
+            "content": "{{ product.metafields.custom.additionaldetailss | metafield_tag }}",
             "page": ""
           }
         },

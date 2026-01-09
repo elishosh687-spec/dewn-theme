@@ -84,9 +84,9 @@
         "collapsible_tab_DnfUjA": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "תיאור פריט",
+            "heading": "מידע נוסף",
             "icon": "none",
-            "content": "<p>{{ product.description }}</p>",
+            "content": "{{ product.description }}",
             "page": ""
           }
         },
@@ -95,7 +95,7 @@
           "settings": {
             "heading": "rrr",
             "icon": "none",
-            "content": "{{ product.metafields.custom.delivery | metafield_tag }}",
+            "content": "<p>{{ product.metafields.custom.delivery | metafield_tag }}</p>",
             "page": ""
           }
         }

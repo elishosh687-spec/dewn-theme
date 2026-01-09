@@ -77,7 +77,7 @@
           "settings": {
             "heading": "משלוחים והחזרות",
             "icon": "none",
-            "content": "<p>מידע על משלוחים והחזרות יופיע כאן.</p>",
+            "content": "{{ product.metafields.custom.delivery | metafield_tag }}",
             "page": ""
           }
         },

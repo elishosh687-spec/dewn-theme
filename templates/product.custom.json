@@ -89,6 +89,15 @@
             "content": "<p>{{ product.description }}</p>",
             "page": ""
           }
+        },
+        "collapsible_tab_aGn7i6": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "rrr",
+            "icon": "none",
+            "content": "{{ product.metafields.custom.delivery | metafield_tag }}",
+            "page": ""
+          }
         }
       },
       "block_order": [
@@ -103,7 +112,8 @@
         "share",
         "collapsible_tab_97V6V6",
         "collapsible_tab_rakHPf",
-        "collapsible_tab_DnfUjA"
+        "collapsible_tab_DnfUjA",
+        "collapsible_tab_aGn7i6"
       ],
       "custom_css": [
         "details summary {font-family: FbTubicSans-Light, sans-serif !important; font-size: 13px !important; font-weight: 400 !important; line-height: 24.7px !important; display: flex; justify-content: space-between; padding: 10px 0 !important;}"

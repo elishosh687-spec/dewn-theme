@@ -93,9 +93,9 @@
         "collapsible_tab_aGn7i6": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "rrr",
+            "heading": "אחריות",
             "icon": "none",
-            "content": "",
+            "content": "<p>{{ product.metafields.custom.securing | metafield_tag }}</p>",
             "page": ""
           }
         }

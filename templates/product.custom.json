@@ -77,7 +77,7 @@
           "settings": {
             "heading": "משלוחים והחזרות",
             "icon": "none",
-            "content": "<p>{{ product.metafields.custom.ship | metafield_tag }}</p>",
+            "content": "{{ product.metafields.custom.shipp | metafield_tag }}",
             "page": ""
           }
         },
@@ -86,7 +86,7 @@
           "settings": {
             "heading": "מידע נוסף",
             "icon": "none",
-            "content": "<p>{{ product.metafields.custom.info | metafield_tag }}</p>",
+            "content": "{{ product.metafields.custom.infoo | metafield_tag }}",
             "page": ""
           }
         },
@@ -95,7 +95,7 @@
           "settings": {
             "heading": "אחריות",
             "icon": "none",
-            "content": "<p>{{ product.metafields.custom.securing | metafield_tag }}</p>",
+            "content": "{{ product.metafields.custom.securingg | metafield_tag }}",
             "page": ""
           }
         }
